@@ -1,24 +1,45 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import { RouteComponentProps, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Property from '../models/property';
-import PropertyCardDetail from '../components/property-card-detail';
-import PropertyService from '../services/property-service';
-import Loader from '../components/loader';
  
-type Params = { idProperty: string };
- 
-const PropertyDetail: FunctionComponent<RouteComponentProps<Params>> = ({ match }) => {
-   
-  const [property, setProperty] = useState<Property|null>(null);
- 
-  useEffect(() => {
-    PropertyService.getProperty(+match.params.idProperty).then(property => setProperty(property));
-  }, [match.params.idProperty]);
+type Props = {
+    property: Property
+  };
+  
+  const PropertyCardDetail: FunctionComponent<Props> = ({property }) => {
    
   return (
-    <div>
-      { property ? (
-        <PropertyCardDetail key={property.idProperty} property={property} />
+    <div className="card border p-0 m-5">
+    {property.data.length > 0 && (
+          property.data.map(data => (
+            data.keyPropertyData === 'thumbnail' && (
+              <img src={data.valuePropertyData} alt="image" className="card-img-top" />
+            )
+          ))
+      )}
+    <div className="card-body">
+      <h5 className="card-title">{property.typeProperty}</h5>
+      <p className="card-text">
+      {new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(Number(property.priceProperty))}
+      </p>
+      <tr> 
+        <td>Type</td> 
+       <td><strong>{ property.typeProperty }</strong></td> 
+       </tr>
+        <tr> 
+        <td>Prix</td> 
+        <td><strong>{ property.priceProperty }</strong></td> 
+        </tr> 
+        <tr> 
+        <td>Code postal</td> 
+        <td><strong>{ property.zipCodeProperty }</strong></td> 
+</tr> 
+<tr> 
+    <td>Ville</td> 
+     <td><strong>{ property.cityProperty }</strong></td> 
+</tr>
+    </div>
+  </div>
         // <div className="row">
         //   <div className="col s12 m8 offset-m2"> 
         //     <h2 className="header center">{ property.typeProperty }</h2>
@@ -56,11 +77,7 @@ const PropertyDetail: FunctionComponent<RouteComponentProps<Params>> = ({ match 
         //     </div>
         //   </div>
         // </div>
-      ) : (
-        <h4 className="center"><Loader /></h4>
-      )}
-    </div>
   );
 }
  
-export default PropertyDetail;
+export default PropertyCardDetail;
