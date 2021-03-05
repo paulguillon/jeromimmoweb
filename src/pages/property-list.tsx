@@ -4,7 +4,6 @@ import PropertyCard from '../components/property-card';
 import PropertyService from '../services/property-service';
 import PropertySearch from '../components/property-search';
 import Loader from '../components/loader';
-// import { Link } from 'react-router-dom';
 
 const PropertyList: FunctionComponent = () => {
   const [properties, setProperties] = useState<Property[]>([]);
