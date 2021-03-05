@@ -1,29 +1,27 @@
 import React, { FunctionComponent } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import PropertiesList from './pages/property/properties-list';
+import PropertyList from './pages/property-list';
+import PropertyDetail from './pages/property-detail';
 import PageNotFound from './pages/page-not-found';
-import Login from './pages/login';
-import PrivateRoute from './PrivateRoute';
  
 const App: FunctionComponent = () => {
- 
-  return (
+   
+ return (
     <Router>
-      <div>
-      <nav> 
-        <div className="nav-wrapper teal">
-          <Link to="/" className="brand-logo center">Jeromimmo</Link>
-        </div> 
-      </nav>
-      <Switch>
-        <PrivateRoute exact path="/" component={PropertiesList} />
-        <Route exact path="/login" component={Login} />
-        <PrivateRoute exact path="/properties" component={PropertiesList} />
-        <Route component={PageNotFound} />
-      </Switch>
-      </div>
+        <div>
+        <nav> 
+            <div className="nav-wrapper teal">
+                <Link to="/" className="brand-logo center">Biens immobilier</Link>
+            </div> 
+        </nav>
+        <Switch>
+            <Route exact path="/" component={PropertyList} />
+            <Route path="/property/:idProperty" component={PropertyDetail} />
+            <Route component={PageNotFound} />
+        </Switch>
+        </div>
     </Router>
-  );
+ )
 }
  
 export default App;

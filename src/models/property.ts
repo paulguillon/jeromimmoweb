@@ -1,7 +1,7 @@
 import PropertyData from './propertyData';
 
 export default class Property {
-  idProperty: number;
+    idProperty: number;
   typeProperty: string;
   priceProperty: string;
   zipCodeProperty: string;
@@ -29,4 +29,4 @@ export default class Property {
     this.updated_by = updated_by;
     this.data = data;
   }
-}
+   }

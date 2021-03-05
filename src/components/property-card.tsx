@@ -1,20 +1,18 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Property from '../../models/property';
-// import formatDate from '../../helpers/format-date';
-// import formatType from '../../helpers/format-type';
+import Property from '../models/property';
 
 type Props = {
   property: Property,
   borderColor?: string
 };
 
-const PropertyCard: FunctionComponent<Props> = ({ property, borderColor = '#009688' }) => {
+const PropertyCard: FunctionComponent<Props> = ({property, borderColor = '#009688' }) => {
 
-  const [color, setColor] = useState<string>();
-  const history = useHistory();
+const [color, setColor] = useState<string>();
+const history = useHistory();
 
-  const showBorder = () => {
+const showBorder = () => {
     setColor(borderColor);
   };
 
@@ -22,12 +20,12 @@ const PropertyCard: FunctionComponent<Props> = ({ property, borderColor = '#0096
     setColor('#f5f5f5');
   };
 
-  const goToProperty = (id: number) => {
-    history.push(`/properties/${id}`);
+const goToProperty = (idProperty: number) => {
+    history.push(`/property/${idProperty}`);
   }
-
+ 
   return (
-    <div className="col s6 m4" onMouseEnter={showBorder} onMouseLeave={hideBorder}>
+    <div className="col s6 m4" onMouseEnter={showBorder} onMouseLeave={hideBorder} onClick={() => goToProperty(property.idProperty)}>
       <div className="card horizontal" style={{ borderColor: color,maxHeight:'150px' }}>
         <div className="card-image" style={{ display: 'flex' }}>
           {property.data.length > 0 && (
@@ -49,5 +47,5 @@ const PropertyCard: FunctionComponent<Props> = ({ property, borderColor = '#0096
     </div >
   );
 }
-
+ 
 export default PropertyCard;

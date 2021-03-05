@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Property from '../../models/property';
-import PropertyService from '../../services/property-service';
+import Property from '../models/property';
+import PropertyService from '../services/property-service';
 
 const PropertySearch: FunctionComponent = () => {
  
@@ -26,11 +26,11 @@ const PropertySearch: FunctionComponent = () => {
       <div className="card"> 
       <div className="card-content"> 
         <div className="input-field"> 
-        <input type="text" placeholder="Rechercher un pokémon" value={term} onChange={e => handleInputChange(e)} /> 
+        <input type="text" placeholder="Rechercher un bien" value={term} onChange={e => handleInputChange(e)} /> 
         </div> 
         <div className='collection'>
         {properties.map((property) => (
-          <Link key={property.idProperty} to={`/properties/${property.idProperty}`} className="collection-item">
+          <Link key={property.idProperty} to={`/property/${property.idProperty}`} className="collection-item">
             {property.typeProperty}
           </Link>
         ))}
