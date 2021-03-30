@@ -13,7 +13,7 @@ const PropertyList: FunctionComponent = () => {
   }, []);
 
   return (
-    <div>
+    <div className="p-3">
       <h1 className="center">Biens immobiliers</h1>
       <div className="container"> 
       { properties ? (
