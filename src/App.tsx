@@ -28,7 +28,7 @@ const App: FunctionComponent = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto">
                             <li><Link to="/">Accueil</Link></li>
-                            <li><Link to="/pages/property-list">Liste propriété</Link></li>
+                            <li><Link to="/pages/property-list">Liste propriétés</Link></li>
                         </ul>
                     </div>
                 </div>
