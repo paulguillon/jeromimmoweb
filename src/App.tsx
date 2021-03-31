@@ -2,7 +2,9 @@ import React, { FunctionComponent } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PropertyList from './pages/property-list';
 import PropertyDetail from './pages/property-detail';
-import './assets/css/nav.css';
+import AgencyList from './pages/agency-list';
+import AgencyDetail from './pages/agency-detail';
+
 import './assets/css/general.css';
 import PageNotFound from './pages/page-not-found';
 
@@ -29,6 +31,7 @@ const App: FunctionComponent = () => {
                         <ul className="navbar-nav me-auto">
                             <li><Link to="/">Accueil</Link></li>
                             <li><Link to="/pages/property-list">Liste propriétés</Link></li>
+                            <li><Link to="/pages/agency-list">Liste des agences</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -36,6 +39,8 @@ const App: FunctionComponent = () => {
             <Switch>
                 <Route exact path="/pages/property-list" component={PropertyList} />
                 <Route path="/property/:idProperty" component={PropertyDetail} />
+                <Route exact path="/pages/agency-list" component={AgencyList} />
+                <Route path="/agency/:idAgency" component={AgencyDetail} />
                 <Route path="/" />
             </Switch>
         </Router>
