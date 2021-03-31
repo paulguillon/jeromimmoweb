@@ -1,23 +1,22 @@
 import App from "../App";
 import Property from "../models/property";
-
-
+import axios from 'axios';
 
 export default class PropertyService {
-  static getProperties(): Promise<Property[]> {
-    return fetch(`http://jeromimmo.fr/public/index.php/api/v1/properties`,)
-      .then(response => response.json());
+  static getProperties() {
+    return axios.get(`http://jeromimmo.fr/public/index.php/api/v1/properties`)
+      .then(res => res.data)
   }
 
   static getProperty(idProperty: number): Promise<Property | null> {
-    return fetch(`http://jeromimmo.fr/public/index.php/api/v1/properties/${idProperty}`)
-      .then(response => response.json())
+    return axios.get(`http://jeromimmo.fr/public/index.php/api/v1/properties/${idProperty}`)
+      .then(response => response.data)
       .then(data => this.isEmpty(data) ? null : data);
   }
 
   static searchProperty(term: string): Promise<Property[]> {
-    return fetch(`http://jeromimmo.fr/public/index.php/api/v1/properties?q=${term}`)
-      .then(response => response.json())
+    return axios.get(`http://jeromimmo.fr/public/index.php/api/v1/properties?q=${term}`)
+      .then(response => response.data)
   }
 
   static isEmpty(data: Object): boolean {
