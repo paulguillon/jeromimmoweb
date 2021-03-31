@@ -7,6 +7,7 @@ import AgencyDetail from './pages/agency-detail';
 
 import './assets/css/general.css';
 import PageNotFound from './pages/page-not-found';
+import logo from './assets/img/logo.jpg';
 
 
 const App: FunctionComponent = () => {
@@ -15,7 +16,7 @@ const App: FunctionComponent = () => {
         <Router>
             <nav className="navbar navbar-expand-lg perso-black sticky-top">
                 <div className="container-fluid">
-                    <img src="/" alt="logo" width="50px" height="50px" />
+                    <img src={logo} alt="logo" width="50px" height="50px" />
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -37,7 +38,7 @@ const App: FunctionComponent = () => {
                 </div>
             </nav>
             <Switch>
-                <Route exact path="/pages/property-list" component={PropertyList} />
+                <Route exact path="/properties" component={PropertyList} />
                 <Route path="/property/:idProperty" component={PropertyDetail} />
                 <Route exact path="/pages/agency-list" component={AgencyList} />
                 <Route path="/agency/:idAgency" component={AgencyDetail} />
