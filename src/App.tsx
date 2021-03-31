@@ -5,6 +5,7 @@ import PropertyDetail from './pages/property-detail';
 import './assets/css/nav.css';
 import './assets/css/general.css';
 import PageNotFound from './pages/page-not-found';
+import logo from './assets/img/logo.jpg';
 
 
 const App: FunctionComponent = () => {
@@ -13,7 +14,7 @@ const App: FunctionComponent = () => {
         <Router>
             <nav className="navbar navbar-expand-lg perso-black sticky-top">
                 <div className="container-fluid">
-                    <img src="/" alt="logo" width="50px" height="50px" />
+                    <img src={logo} alt="logo" width="50px" height="50px" />
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -28,13 +29,13 @@ const App: FunctionComponent = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto">
                             <li><Link to="/">Accueil</Link></li>
-                            <li><Link to="/pages/property-list">Liste propriétés</Link></li>
+                            <li><Link to="/properties">Liste propriétés</Link></li>
                         </ul>
                     </div>
                 </div>
             </nav>
             <Switch>
-                <Route exact path="/pages/property-list" component={PropertyList} />
+                <Route exact path="/properties" component={PropertyList} />
                 <Route path="/property/:idProperty" component={PropertyDetail} />
                 <Route path="/" />
             </Switch>
