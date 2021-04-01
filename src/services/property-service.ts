@@ -3,9 +3,19 @@ import Property from "../models/property/property";
 import axios from 'axios';
 
 export default class PropertyService {
-  
-  static getProperties(type?: string) {
-    return axios.get(`http://jeromimmo.fr/public/index.php/api/v1/properties?${type}`)
+
+  static getProperties(type?: string, price?: string, zipCode?: string) {
+    let filters = [];
+    if (type)
+      filters.push(`typeProperty=${type}`);
+    if (price)
+      filters.push(`priceProperty=${price}`);
+    if (zipCode)
+      filters.push(`zipCodeProperty=${zipCode}`);
+
+    filters.join('&');
+
+    return axios.get(`http://jeromimmo.fr/public/index.php/api/v1/properties${filters}`)
       .then(res => res.data)
   }
 

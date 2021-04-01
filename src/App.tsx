@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './pages/home';
-import PropertyList from './pages/property/property-list';
+import Properties from './pages/property/properties';
 import PropertyDetail from './pages/property/property-detail';
 
 import AgencyList from './pages/agency/agency-list';
@@ -18,7 +18,7 @@ const App: FunctionComponent = () => {
             <HeaderNavigation />
             <Switch>
                 <Route exact path="/login" component={Login} />
-                <Route exact path="/properties" component={PropertyList} />
+                <Route exact path="/properties" component={Properties} />
                 <Route path="/property/:idProperty" component={PropertyDetail} />
                 <Route exact path="/agencies" component={AgencyList} />
                 <Route path="/agency/:idAgency" component={AgencyDetail} />
