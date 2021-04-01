@@ -3,8 +3,9 @@ import Property from "../models/property";
 import axios from 'axios';
 
 export default class PropertyService {
-  static getProperties() {
-    return axios.get(`http://jeromimmo.fr/public/index.php/api/v1/properties`)
+  
+  static getProperties(type?: string) {
+    return axios.get(`http://jeromimmo.fr/public/index.php/api/v1/properties?${type}`)
       .then(res => res.data)
   }
 
