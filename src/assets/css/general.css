@@ -1,32 +1,64 @@
- .perso-black {
-   background-color: #495464;
- }
+@charset "utf-8";
+header, section, footer, aside, nav, main, article, figure {
+  display: block;
+}
 
- .hoverNav:hover {
-   background-color: white;
-   color: #68b0ab;
- }
+div, header, nav, article, section, aside, footer, h1, h2, h3, h4, h5, h6, p, a, ul, li, figure, figcaption, class, img {
+  margin: 0;
+  padding: 0;
+}
 
- nav {
-   height: inherit!important;
- }
+img {
+  display: block;
+}
 
- nav i {
-   height: inherit!important;
- }
+main {
+  overflow: hidden;
+}
 
- .fa-bars:before {
-   color: white;
- }
+img, object, embed, canvas, video, audio, picture, svg {
+  max-width: 100%;
+  height: auto;
+}
 
- .navbar-toggler {
-   width: 50px;
-   height: 50px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
- }
+* {
+  box-sizing: border-box;
+}
 
- .navbar-toggler i {
-   height: auto!important;
- }
+.perso-black {
+  background-color: #495464;
+}
+
+.hoverNav:hover {
+  background-color: white;
+  color: #68b0ab;
+}
+
+nav {
+  height: inherit!important;
+}
+
+nav i {
+  height: inherit!important;
+}
+
+footer {
+  background-color: #68b0ab;
+  margin: 0;
+}
+
+.fa-bars:before {
+  color: white;
+}
+
+.navbar-toggler {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-toggler i {
+  height: auto!important;
+}
