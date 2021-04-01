@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import logo from '../../assets/img/logo.jpg';
 
 function HeaderNavigation() {
     return (
         <nav className="navbar navbar-expand-lg perso-black sticky-top">
             <div className="container-fluid">
-                <img src="../../assets/img/logo.jpg" alt="logo" width="50px" height="50px" />
+                <img src={logo} alt="logo" width="50px" height="50px" />
                 <button
                     className="navbar-toggler"
                     type="button"
