@@ -21,7 +21,12 @@ function Login() {
             },
             body: JSON.stringify(item)
         });
-        result = await result.json();
+        let data = await result.json();
+
+        //if token is correct
+        if(data.status == "success" && data.token_type == "bearer")
+            localStorage.token = data.token;
+            
         history.push("/");
     }
     return (
