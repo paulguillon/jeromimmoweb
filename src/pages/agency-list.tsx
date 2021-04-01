@@ -14,7 +14,7 @@ const AgencyList: FunctionComponent = () => {
 
   return (
     <div className="p-3">
-      <h1 className="center">Agences</h1>
+      <h1 className="center">Liste des Agences</h1>
       <div className="container"> 
       { agencies ? (
         <div className="row justify-content-center">
