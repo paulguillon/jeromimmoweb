@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import '../../assets/css/login.css';
+import imageForm from '../../assets/img/imageForm.jpg';
+
 
 function Login() {
     const [emailUser, setEmailUser] = useState("");
@@ -24,17 +27,23 @@ function Login() {
         let data = await result.json();
 
         //if token is correct
-        if(data.status == "success" && data.token_type == "bearer")
+        if (data.status == "success" && data.token_type == "bearer")
             localStorage.token = data.token;
-            
+
         history.push("/");
     }
     return (
-        <div>
-            <h1>Se connecter</h1>
-            <input type="email" placeholder="E-mail" onChange={(e) => setEmailUser(e.target.value)}></input>
-            <input type="password" placeholder="Mot de passe" onChange={(e) => setUserPassword(e.target.value)}></input>
-            <button type="submit" onClick={login}>Connexion</button>
+        <div className="m-auto w-25 container-form">
+            <div className="w-100 d-flex flex-column justify-content-between ">
+                <h1>Se connecter</h1>
+                <div className="inputForm">
+                    <input type="email" placeholder="E-mail" onChange={(e) => setEmailUser(e.target.value)}></input>
+                </div>
+                <div>
+                    <input type="password" placeholder="Mot de passe" onChange={(e) => setUserPassword(e.target.value)}></input>
+                </div>
+                <button type="submit" className="center buttonForm" onClick={login}>Connexion</button>
+            </div>
         </div>
     )
 }
