@@ -19,6 +19,9 @@ const PropertyList: FunctionComponent = () => {
       { properties ? (
         <div className="row justify-content-center">
             {/* <PropertySearch /> */}
+            {/* {properties.filter(property => property.typeProperty == 'Maison').map(property => (
+                <PropertyCard key={property.idProperty} property={property}/>
+            ))} */}
             {properties.map(property => (
                 <PropertyCard key={property.idProperty} property={property}/>
             ))}
