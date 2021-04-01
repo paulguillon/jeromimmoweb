@@ -5,6 +5,7 @@ import PropertyDetail from './pages/property-detail';
 import './assets/css/nav.css';
 import './assets/css/general.css';
 import PageNotFound from './pages/page-not-found';
+import Login from './components/auth/login';
 
 
 const App: FunctionComponent = () => {
@@ -29,11 +30,13 @@ const App: FunctionComponent = () => {
                         <ul className="navbar-nav me-auto">
                             <li><Link to="/">Accueil</Link></li>
                             <li><Link to="/pages/property-list">Liste propriétés</Link></li>
+                            <li><Link to="/pages/login">Connexion</Link></li>
                         </ul>
                     </div>
                 </div>
             </nav>
             <Switch>
+                <Route exact path="/pages/login" component={Login} />
                 <Route exact path="/pages/property-list" component={PropertyList} />
                 <Route path="/property/:idProperty" component={PropertyDetail} />
                 <Route path="/" />
