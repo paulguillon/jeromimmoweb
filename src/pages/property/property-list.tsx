@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import Property from '../models/property/property';
-import PropertyCard from '../components/property/property-card';
-import PropertyService from '../services/property-service';
-// import PropertySearch from '../components/property-search';
-import Loader from '../components/loader';
+import Property from '../../models/property/property';
+import PropertyCard from '../../components/property/property-card';
+import PropertyService from '../../services/property-service';
+// import PropertySearch from '../../components/property-search';
+import Loader from '../../components/loader';
 
 const PropertyList: FunctionComponent = () => {
   const [properties, setProperties] = useState<Property[]>([]);

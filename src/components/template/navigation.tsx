@@ -19,11 +19,11 @@ function HeaderNavigation() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto">
                         <li><Link to="/">Accueil</Link></li>
-                        <li><Link to="/pages/property-list">Liste propriétés</Link></li>
-                        <li><Link to="/pages/agency-list">Liste des agences</Link></li>
+                        <li><Link to="/properties">Liste propriétés</Link></li>
+                        <li><Link to="/agencies">Liste des agences</Link></li>
                     </ul>
                     <ul className="navbar-nav d-flex justify-content-lg-end align-content-end">
-                        <li><Link to="/pages/login">Connexion</Link></li>
+                        <li><Link to="/login">Connexion</Link></li>
                     </ul>
                 </div>
             </div>
