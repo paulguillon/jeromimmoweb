@@ -7,8 +7,11 @@
     "@types/react": "17.0.2",
     "@types/react-dom": "17.0.1",
     "@types/react-router-dom": "^5.1.7",
+<<<<<<< HEAD
     "dotenv": "^8.2.0",
     "mdb-ui-kit": "^3.3.0",
+=======
+>>>>>>> 65fdafdb9bda1b35fc7dd129e2909e29b7bbcc65
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
