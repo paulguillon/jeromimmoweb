@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './pages/home';
-import PropertyList from './pages/property-list';
-import PropertyDetail from './pages/property-detail';
-import AgencyList from './pages/agency-list';
-import AgencyDetail from './pages/agency-detail';
+import PropertyList from './pages/property/property-list';
+import PropertyDetail from './pages/property/property-detail';
+
+import AgencyList from './pages/agency/agency-list';
+import AgencyDetail from './pages/agency/agency-detail';
+
 import Login from './components/auth/login';
 import HeaderNavigation from './components/template/navigation';
 import FooterNavigation from './components/template/footer';
@@ -15,11 +17,10 @@ const App: FunctionComponent = () => {
         <Router>
             <HeaderNavigation />
             <Switch>
-                <Route exact path="/pages/login" component={Login} />
-                <Route exact path="/pages/property-list" component={PropertyList} />
+                <Route exact path="/login" component={Login} />
                 <Route exact path="/properties" component={PropertyList} />
                 <Route path="/property/:idProperty" component={PropertyDetail} />
-                <Route exact path="/pages/agency-list" component={AgencyList} />
+                <Route exact path="/agencies" component={AgencyList} />
                 <Route path="/agency/:idAgency" component={AgencyDetail} />
                 <Route path="/" component={Home}/>
             </Switch>
