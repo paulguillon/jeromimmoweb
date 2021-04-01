@@ -2,10 +2,13 @@ import React, { FunctionComponent } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PropertyList from './pages/property-list';
 import PropertyDetail from './pages/property-detail';
-import './assets/css/nav.css';
+import AgencyList from './pages/agency-list';
+import AgencyDetail from './pages/agency-detail';
+
 import './assets/css/general.css';
 import PageNotFound from './pages/page-not-found';
 import Login from './components/auth/login';
+import logo from './assets/img/logo.jpg';
 
 
 const App: FunctionComponent = () => {
@@ -14,7 +17,7 @@ const App: FunctionComponent = () => {
         <Router>
             <nav className="navbar navbar-expand-lg perso-black sticky-top">
                 <div className="container-fluid">
-                    <img src="/" alt="logo" width="50px" height="50px" />
+                    <img src={logo} alt="logo" width="50px" height="50px" />
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -31,6 +34,7 @@ const App: FunctionComponent = () => {
                             <li><Link to="/">Accueil</Link></li>
                             <li><Link to="/pages/property-list">Liste propriétés</Link></li>
                             <li><Link to="/pages/login">Connexion</Link></li>
+                            <li><Link to="/pages/agency-list">Liste des agences</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -38,7 +42,10 @@ const App: FunctionComponent = () => {
             <Switch>
                 <Route exact path="/pages/login" component={Login} />
                 <Route exact path="/pages/property-list" component={PropertyList} />
+                <Route exact path="/properties" component={PropertyList} />
                 <Route path="/property/:idProperty" component={PropertyDetail} />
+                <Route exact path="/pages/agency-list" component={AgencyList} />
+                <Route path="/agency/:idAgency" component={AgencyDetail} />
                 <Route path="/" />
             </Switch>
         </Router>
