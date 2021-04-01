@@ -1,5 +1,5 @@
 import App from "../App";
-import Property from "../models/property";
+import Property from "../models/property/property";
 import axios from 'axios';
 
 export default class PropertyService {

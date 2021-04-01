@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import Property from '../models/property';
-import PropertyCard from '../components/property-card';
+import Property from '../models/property/property';
+import PropertyCard from '../components/property/property-card';
 import PropertyService from '../services/property-service';
 import Loader from '../components/loader';
 

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Agency from '../models/agency';
-import './agency-card.css';
+import Agency from '../../models/agency/agency';
+import '../../assets/css/agency-card.css';
 
 type Props = {
   agency: Agency,

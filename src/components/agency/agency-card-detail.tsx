@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Agency from '../models/agency';
+import Agency from '../../models/agency/agency';
 
 type Props = {
   property: Agency

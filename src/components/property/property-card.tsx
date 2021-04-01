@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Property from '../models/property';
-import './property-card.css';
+import Property from '../../models/property/property';
+import '../../assets/css/property-card.css';
 
 type Props = {
   property: Property,

@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
-import Property from '../models/property';
-import PropertyCardDetail from '../components/property-card-detail';
+import Property from '../models/property/property';
+import PropertyCardDetail from '../components/property/property-card-detail';
 import PropertyService from '../services/property-service';
 import Loader from '../components/loader';
  

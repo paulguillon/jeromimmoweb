@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import Agency from '../models/agency';
-import AgencyCard from '../components/agency-card';
+import Agency from '../models/agency/agency';
+import AgencyCard from '../components/agency/agency-card';
 import AgencyService from '../services/agency-service';
 // import PropertySearch from '../components/agency-search';
 import Loader from '../components/loader';

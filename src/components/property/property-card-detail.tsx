@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Property from '../models/property';
+import Property from '../../models/property/property';
 
 type Props = {
   property: Property

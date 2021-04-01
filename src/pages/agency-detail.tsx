@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import { RouteComponentProps, Link } from 'react-router-dom';
-import Agency from '../models/agency';
-import AgencyCardDetail from '../components/agency-card-detail';
+import Agency from '../models/agency/agency';
+import AgencyCardDetail from '../components/agency/agency-card-detail';
 import AgencyService from '../services/agency-service';
 import Loader from '../components/loader';
 
