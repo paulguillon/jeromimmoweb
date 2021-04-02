@@ -1,5 +1,5 @@
 import App from "../App";
-import Agency from "../models/agency";
+import Agency from "../models/agency/agency";
 
 
 export default class AgencyService {

@@ -1,0 +1,39 @@
+.perso-black {
+    background-color: #495464;
+}
+
+nav {
+    height: inherit!important;
+    background-color: white;
+}
+
+nav ul li a {
+    color: #68b0ab;
+    font-weight: 500;
+}
+
+nav ul li a:hover {
+    background-color: inherit;
+    color: #2ab7a9;
+}
+
+nav button:focus {
+    background-color: inherit;
+    color: white;
+}
+
+.fa-bars:before {
+    color: #68b0ab;
+}
+
+.navbar-toggler {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-toggler i {
+    height: auto!important;
+}

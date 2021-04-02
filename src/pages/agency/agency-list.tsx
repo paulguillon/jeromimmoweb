@@ -1,9 +1,9 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import Agency from '../models/agency';
-import AgencyCard from '../components/agency-card';
-import AgencyService from '../services/agency-service';
-// import PropertySearch from '../components/agency-search';
-import Loader from '../components/loader';
+import Agency from '../../models/agency/agency';
+import AgencyCard from '../../components/agency/agency-card';
+import AgencyService from '../../services/agency-service';
+// import PropertySearch from '../../components/agency-search';
+import Loader from '../../components/loader';
 
 const AgencyList: FunctionComponent = () => {
   const [agencies, setAgencies] = useState<Agency[]>([]);
@@ -14,7 +14,7 @@ const AgencyList: FunctionComponent = () => {
 
   return (
     <div className="p-3">
-      <h1 className="center">Agences</h1>
+      <h1 className="center">Liste des Agences</h1>
       <div className="container"> 
       { agencies ? (
         <div className="row justify-content-center">

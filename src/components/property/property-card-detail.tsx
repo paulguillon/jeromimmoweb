@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Property from '../models/property';
+import Property from '../../models/property/property';
 
 type Props = {
   property: Property
@@ -28,7 +28,7 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
         </tr>
         <tr>
           <td>Prix</td>
-          <td><strong>{property.priceProperty}</strong></td>
+          <td><strong>{property.priceProperty} €</strong></td>
         </tr>
         <tr>
           <td>Code postal</td>

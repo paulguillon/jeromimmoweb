@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Property from '../models/property';
-import PropertyService from '../services/property-service';
+import Property from '../../models/property/property';
+import PropertyService from '../../services/property-service';
 
 const PropertySearch: FunctionComponent = () => {
 

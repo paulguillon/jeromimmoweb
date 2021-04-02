@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Agency from '../models/agency';
-import './agency-card.css';
+import Agency from '../../models/agency/agency';
+import '../../assets/css/agency-card.css';
 
 type Props = {
   agency: Agency,
@@ -37,7 +37,7 @@ const AgencyCard: FunctionComponent<Props> = ({ agency, borderColor = '#009688' 
       <div className="card-body">
         <h5 className="card-title">{agency.nameAgency}</h5>
         <p className="card-text">
-          "test"
+          {agency.zipCodeAgency} {agency.cityAgency}
         </p>
         <button className="btn btn-primary" onClick={() => goToAgency(agency.idAgency)}>Détail</button>
       </div>
