@@ -5,15 +5,15 @@ import axios from 'axios';
 export default class PropertyService {
 
   static getProperties(type?: string, price?: string, zipCode?: string) {
-    let filters = [];
+    let filtersArray = [];
     if (type)
-      filters.push(`typeProperty=${type}`);
+      filtersArray.push(`typeProperty=${type}`);
     if (price)
-      filters.push(`priceProperty=${price}`);
+      filtersArray.push(`priceProperty=${price}`);
     if (zipCode)
-      filters.push(`zipCodeProperty=${zipCode}`);
+      filtersArray.push(`zipCodeProperty=${zipCode}`);
 
-    filters.join('&');
+    let filters = '?' + filtersArray.join('&');
 
     return axios.get(`http://jeromimmo.fr/public/index.php/api/v1/properties${filters}`)
       .then(res => res.data)
