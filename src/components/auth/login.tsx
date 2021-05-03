@@ -13,8 +13,10 @@ function Login() {
             history.push("/")
         }
     }, [])
+
+
     async function login() {
-        console.log(emailUser, passwordUser);
+
         let item = { emailUser, passwordUser }
         let result = await fetch('http://jeromimmo.fr/public/index.php/api/v1/login', {
             method: "POST",
@@ -26,11 +28,13 @@ function Login() {
         });
         let data = await result.json();
 
-        //if token is correct
-        if (data.status == "success" && data.token_type == "bearer")
+        if (data.status == "success" && data.token_type == "bearer") {
             localStorage.token = data.token;
-
-        history.push("/");
+            history.push("/");
+        }
+        if (data.message == "Unauthorized") {
+            history.push("/login");
+        }
     }
     return (
         <div className="m-auto w-25 container-form">
@@ -49,3 +53,5 @@ function Login() {
 }
 
 export default Login
+
+
