@@ -33,8 +33,6 @@ function Login() {
             .catch(err => console.log(err))
     };
 
-
-
     return (
         <div className="m-auto w-25 container-form">
             <div className="w-100 d-flex flex-column justify-content-between ">
@@ -49,8 +47,8 @@ function Login() {
                     </div>
                     <button type="submit" className="center buttonForm"  >Connexion</button>
                 </form>
-                <span className="mt-4 text-decoration-underline">Mot de passe oublié ?  </span>
-                <span className="mt-2 text-decoration-underline">Pas de compte ? </span>
+                <a className="mt-4 text-decoration-underline">Mot de passe oublié ?  </a>
+                <a href="/register" className="mt-2 text-decoration-underline" >S'inscrire</a>
             </div >
         </div >
     )
