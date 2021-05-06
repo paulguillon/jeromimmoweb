@@ -1,22 +1,17 @@
 import { Link } from 'react-router-dom';
 import logo from '../../assets/img/logo.svg';
 import '../../assets/css/nav.css';
+import { FunctionComponent, useEffect, useState } from 'react';
 // import Login from "../auth/login"
 // import Logout from "../auth/logout"
-import { useEffect, useState } from 'react'
 
-function HeaderNavigation() {
+
+
+const HeaderNavigation: FunctionComponent = () => {
+
     const token = localStorage.getItem('token');
-    // const [token, setToken] = useState();
 
-    // useEffect(() => {
-    //     if (localStorage.getItem('token')) {
-    //         console.log("render");
-    //         const token = localStorage.getItem('token');
-    //     } else {
-    //         console.log("norender");
-    //     }
-    // }, [token])
+
     return (
         <nav className="navbar navbar-expand-lg sticky-top">
             <div className="container-fluid">
@@ -46,7 +41,7 @@ function HeaderNavigation() {
                     {token ? (
                         < ul className="navbar-nav d-flex justify-content-lg-end align-content-end">
                             <li><Link to="/profile">Profil</Link></li>
-                            <li><Link to="/profile">Déconnexion </Link></li>
+                            <li><Link to="/logout">Déconnexion </Link></li>
                         </ ul>
                     ) : (
                         <ul className="navbar-nav d-flex justify-content-lg-end align-content-end">

@@ -1,55 +1,81 @@
-import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
+// import { useHistory } from 'react-router-dom';
 import '../../assets/css/login.css';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
+
 
 function Login() {
 
-    const [emailUser, setEmailUser] = useState("");
-    const [passwordUser, setUserPassword] = useState("");
+    const [user, setUser] = useState({});
     const history = useHistory();
 
-    async function login() {
+    const handleChange = (e: any) => {
+        setUser({ ...user, [e.target.name]: e.target.value })
+        console.log(user)
+    };
 
-        let item = { emailUser, passwordUser }
-        let result = await fetch('http://jeromimmo.fr/public/index.php/api/v1/login', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(item)
-        });
-        let data = await result.json();
-
-        if (data.status === "success" && data.token_type === "bearer") {
-            localStorage.token = data.token;
-            history.push("/");
-        }
-        if (data.message === "Unauthorized") {
-            history.push("/login?=Unauthorized");
-        }
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        axios.post("http://jeromimmo.fr/public/index.php/api/v1/login", user)
+            .then(data => {
+                localStorage.setItem('token', data.data.token);
+                if (data.data.status === "success" && (data.data.token_type === "bearer")) {
+                    localStorage.token = data.data.token;
+                    console.log(localStorage.token);
+                    history.push("/");
+                }
+                if (data.data.message === "Unauthorized") {
+                    history.push("/login?=Unauthorized");
+                }
+            })
+            .catch(err => console.log(err))
+    };
 
 
-    }
+
     return (
         <div className="m-auto w-25 container-form">
             <div className="w-100 d-flex flex-column justify-content-between ">
-                <h1>Se connecter</h1>
-                <div className="inputForm">
-                    <input type="email" placeholder="E-mail" onChange={(e) => setEmailUser(e.target.value)} ></input>
-                </div>
-                <div>
-                    <input type="password" placeholder="Mot de passe" onChange={(e) => setUserPassword(e.target.value)} ></input>
-                </div>
-                <button type="submit" className="center buttonForm" onClick={login}>Connexion</button>
+                <form action="" onChange={handleChange} onSubmit={handleSubmit}>
+                    <h1>Se connecter</h1>
+                    <div className="inputForm">
+                        <input type="email" name="emailUser" placeholder="E-mail" ></input>
 
-                <span className="mt-4 text-decoration-underline">Mot de passe oublié </span>
-                <span className="mt-2 text-decoration-underline">Pas de compte </span>
+                    </div>
+                    <div>
+                        <input type="password" name="passwordUser" placeholder="Mot de passe" />
+                    </div>
+                    <button type="submit" className="center buttonForm"  >Connexion</button>
+                </form>
+                <span className="mt-4 text-decoration-underline">Mot de passe oublié ?  </span>
+                <span className="mt-2 text-decoration-underline">Pas de compte ? </span>
             </div >
         </div >
     )
+
 }
 
 export default Login;
 
 
+// import React from 'react';
+
+// const Login = () => {
+//     return (
+//         <div className="m-auto w-25 container-form">
+//             <div className="w-100 d-flex flex-column justify-content-between ">
+//                 <form action="">
+//                     <h1>Connexion</h1>
+//                     <input type="email" placeholder="adresse mail" />
+//                     <input type="password" placeholder="Mot de passe" />
+//                     <button type="submit">Connexion</button>
+
+//                 </form>
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default Login;
