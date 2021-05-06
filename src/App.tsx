@@ -5,12 +5,17 @@ import Properties from './pages/property/properties';
 import PropertyDetail from './pages/property/property-detail';
 import AgencyList from './pages/agency/agency-list';
 import AgencyDetail from './pages/agency/agency-detail';
-import Login from './components/auth/login';
+
 import HeaderNavigation from './components/template/navigation';
 import FooterNavigation from './components/template/footer';
 import './assets/css/general.css';
 
+
+import Login from './components/auth/login';
+
 const App: FunctionComponent = () => {
+
+
     return (
         <Router>
             <HeaderNavigation />
