@@ -1,10 +1,10 @@
  
 .container-form {
-    background-color: white;
+    background-color: rgb(235, 235, 235);
     padding: 25px 25px;
     display: flex;
-    border-radius: 5px;
-    box-shadow: 0px 0px 15px rgb(0 0 0 / 15%)
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgb(0 0 0 / 20%)
 }
 
 .container-form .inputForm {
@@ -25,3 +25,7 @@
 .buttonForm:hover {
     background-color: #2ab7a9;
 }
+ ::placeholder {
+    color: #4f4f4f
+  }
+ 

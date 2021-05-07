@@ -31,3 +31,6 @@ img, object, embed, canvas, video, audio, picture, svg {
   flex-direction: column;
   justify-content: space-between;
 }
+body {
+  background-color: white;
+}

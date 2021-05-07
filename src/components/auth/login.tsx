@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
 import '../../assets/css/login.css';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -40,40 +39,19 @@ function Login() {
                     <h1>Se connecter</h1>
                     <div className="inputForm">
                         <input type="email" name="emailUser" placeholder="E-mail" ></input>
-
                     </div>
                     <div>
                         <input type="password" name="passwordUser" placeholder="Mot de passe" />
                     </div>
-                    <button type="submit" className="center buttonForm"  >Connexion</button>
+                    <button type="submit" className="center buttonForm">Connexion</button>
                 </form>
                 <a className="mt-4 text-decoration-underline">Mot de passe oublié ?  </a>
                 <a href="/register" className="mt-2 text-decoration-underline" >S'inscrire</a>
             </div >
         </div >
     )
-
 }
 
 export default Login;
 
 
-// import React from 'react';
-
-// const Login = () => {
-//     return (
-//         <div className="m-auto w-25 container-form">
-//             <div className="w-100 d-flex flex-column justify-content-between ">
-//                 <form action="">
-//                     <h1>Connexion</h1>
-//                     <input type="email" placeholder="adresse mail" />
-//                     <input type="password" placeholder="Mot de passe" />
-//                     <button type="submit">Connexion</button>
-
-//                 </form>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default Login;
