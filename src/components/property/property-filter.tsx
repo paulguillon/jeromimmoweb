@@ -27,12 +27,15 @@ const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }) => {
   return (
     <div className="p-5 bg-light">
       <h1>Filtres</h1>
-      <form onSubmit={handleSubmit} className="d-flex flex-row align-items-center justify-content-around">
+      <form
+        onSubmit={handleSubmit}
+        className="d-flex flex-row align-items-center justify-content-around"
+      >
         <label>
           Type de bien
           <select className="browser-default custom-select" onChange={setType}>
-            <option value="" selected hidden>
-              Choisir un type
+            <option value="" selected>
+              Tous
             </option>
             <option value="Maison">Maison</option>
             <option value="Appartement">Appartement</option>
@@ -53,7 +56,7 @@ const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }) => {
             <span style={{ width: "100%", display: "block" }}>{state.min}</span>
           </label>
           <label>
-            Min
+            Max
             <input
               className="multi-range"
               type="range"
@@ -68,7 +71,17 @@ const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }) => {
           Code postal
           <input type="text" min="0" max="999999" onChange={setZipCode} />
         </label>
-        <button type="submit" className="btn btn-info">Recherche</button>
+        <label>
+          Type de bien
+          <select className="browser-default custom-select" multiple>
+            <option value="Jardin">Jardin</option>
+            <option value="Piscine">Piscine</option>
+            <option value="Garage">Garage</option>
+          </select>
+        </label>
+        <button type="submit" className="btn btn-info">
+          Recherche
+        </button>
       </form>
     </div>
   );

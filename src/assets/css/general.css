@@ -18,7 +18,6 @@ main {
 
 img, object, embed, canvas, video, audio, picture, svg {
   max-width: 100%;
-  height: auto;
 }
 
 * {

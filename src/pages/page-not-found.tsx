@@ -1,17 +1,13 @@
-import React, { FunctionComponent } from 'react';
-import { Link } from 'react-router-dom';
+import React, { FunctionComponent } from "react";
+import BackBtn from "../components/back-btn";
 
 const PageNotFound: FunctionComponent = () => {
-
   return (
     <div className="center">
-
       <h1>Hey, cette page n'existe pas !</h1>
-      <Link to="/" className="waves-effect waves-teal btn-flat">
-        Retourner à l'accueil
-      </Link>
+      <BackBtn />
     </div>
   );
-}
+};
 
 export default PageNotFound;

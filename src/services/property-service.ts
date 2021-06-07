@@ -33,7 +33,7 @@ export default class PropertyService {
         `http://jeromimmo.fr/public/index.php/api/v1/properties/${idProperty}`
       )
       .then((response) => response.data)
-      .then((data) => (this.isEmpty(data) ? null : data));
+      .then((data) => data);
   }
 
   static searchProperty(term: string): Promise<Property[]> {

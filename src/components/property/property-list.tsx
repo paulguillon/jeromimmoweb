@@ -1,33 +1,38 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
+import React, { FunctionComponent } from "react";
 
 import Property from "../../models/property/property";
 import PropertyCard from "../../components/property/property-card";
 
-import Loader from "../../components/loader";
-
 import "../../assets/css/property-card.css";
+import Loader from "../loader";
 
 type Props = {
-  properties: Array<Property>;
+  properties: Array<Property> | null;
   title: string;
 };
 
 const PropertyList: FunctionComponent<Props> = ({ properties, title }) => {
-  //s'il n'y a pas de réponse on retourne rien
-  if (!properties || !Array.isArray(properties)) return null;
-
   return (
-    <div className="p-3">
+    <div className="mb-3" style={{ minHeight: "400px", backgroundColor: 'whitesmoke' }}>
       <div className="container">
-        {properties.length > 0 ? (
-          <div className="row justify-content-center">
-            <h1>{title}</h1>
-            {properties.map((property) => (
-              <PropertyCard key={property.idProperty} property={property} />
-            ))}
-          </div>
+        <h2>{title}</h2>
+
+        {Array.isArray(properties) ? (
+          properties.length > 0 ? (
+            <div className="d-flex flex-wrap justify-content-around">
+              {properties.map((property) => (
+                <PropertyCard key={property.idProperty} property={property} />
+              ))}
+            </div>
+          ) : (
+            <div className="d-flex justify-content-center align-items-center" style={{ height: "400px" }}>
+              <h4 className="center">
+                Aucun résultat
+              </h4>
+            </div>
+          )
         ) : (
-          <h4 className="center">Aucun résultat</h4>
+          <Loader />
         )}
       </div>
     </div>

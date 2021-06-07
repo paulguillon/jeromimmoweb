@@ -34,7 +34,7 @@ const HeaderNavigation: FunctionComponent = () => {
                         <li><Link to="/">Accueil</Link></li>
                         <li><Link to="/properties">Liste propriétés</Link></li>
                         <li><Link to="/agencies">Liste des agences</Link></li>
-                        <li><Link to="">Contact</Link></li>
+                        <li><Link to="/contact">Contact</Link></li>
                     </ul>
 
                     {token ? (
