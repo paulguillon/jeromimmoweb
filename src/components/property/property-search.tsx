@@ -6,7 +6,7 @@ import PropertyService from '../../services/property-service';
 const PropertySearch: FunctionComponent = () => {
 
   const [term, setTerm] = useState<string>('');
-  const [properties, setProperties] = useState<Property[]>([]);
+  const [properties, setProperties] = useState<Property[] | null>();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const term = e.target.value;
@@ -29,7 +29,7 @@ const PropertySearch: FunctionComponent = () => {
               <input type="text" placeholder="Rechercher un bien" value={term} onChange={e => handleInputChange(e)} />
             </div>
             <div className='collection'>
-              {properties.map((property) => (
+              {properties && properties.map((property) => (
                 <Link key={property.idProperty} to={`/property/${property.idProperty}`} className="collection-item">
                   {property.typeProperty}
                 </Link>

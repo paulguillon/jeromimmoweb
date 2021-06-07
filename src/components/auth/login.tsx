@@ -1,51 +1,57 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useState } from 'react';
 import '../../assets/css/login.css';
-import imageForm from '../../assets/img/imageForm.jpg';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+
 
 
 function Login() {
-    const [emailUser, setEmailUser] = useState("");
-    const [passwordUser, setUserPassword] = useState("");
+
+    const [user, setUser] = useState({});
     const history = useHistory();
-    useEffect(() => {
-        if (localStorage.getItem('user-info')) {
-            history.push("/")
-        }
-    }, [])
-    async function login() {
-        console.log(emailUser, passwordUser);
-        let item = { emailUser, passwordUser }
-        let result = await fetch('http://jeromimmo.fr/public/index.php/api/v1/login', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(item)
-        });
-        let data = await result.json();
 
-        //if token is correct
-        if (data.status == "success" && data.token_type == "bearer")
-            localStorage.token = data.token;
+    const handleChange = (e: any) => {
+        setUser({ ...user, [e.target.name]: e.target.value })
+        console.log(user)
+    };
 
-        history.push("/");
-    }
+    const handleSubmit = (e: any) => {
+        e.preventDefault();
+        axios.post("http://jeromimmo.fr/public/index.php/api/v1/login", user)
+            .then(data => {
+                localStorage.setItem('token', data.data.token);
+                if (data.data.status === "success" && (data.data.token_type === "bearer")) {
+                    localStorage.token = data.data.token;
+                    console.log(localStorage.token);
+                    history.push("/");
+                }
+                if (data.data.message === "Unauthorized") {
+                    history.push("/login?=Unauthorized");
+                }
+            })
+            .catch(err => console.log(err))
+    };
+
     return (
         <div className="m-auto w-25 container-form">
             <div className="w-100 d-flex flex-column justify-content-between ">
-                <h1>Se connecter</h1>
-                <div className="inputForm">
-                    <input type="email" placeholder="E-mail" onChange={(e) => setEmailUser(e.target.value)}></input>
-                </div>
-                <div>
-                    <input type="password" placeholder="Mot de passe" onChange={(e) => setUserPassword(e.target.value)}></input>
-                </div>
-                <button type="submit" className="center buttonForm" onClick={login}>Connexion</button>
-            </div>
-        </div>
+                <form action="" onChange={handleChange} onSubmit={handleSubmit}>
+                    <h1>Se connecter</h1>
+                    <div className="inputForm">
+                        <input type="email" name="emailUser" placeholder="E-mail" ></input>
+                    </div>
+                    <div>
+                        <input type="password" name="passwordUser" placeholder="Mot de passe" />
+                    </div>
+                    <button type="submit" className="center buttonForm">Connexion</button>
+                </form>
+                <a className="mt-4 text-decoration-underline">Mot de passe oublié ?  </a>
+                <a href="/register" className="mt-2 text-decoration-underline" >S'inscrire</a>
+            </div >
+        </div >
     )
 }
 
-export default Login
+export default Login;
+
+

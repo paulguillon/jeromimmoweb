@@ -18,7 +18,6 @@ main {
 
 img, object, embed, canvas, video, audio, picture, svg {
   max-width: 100%;
-  height: auto;
 }
 
 * {
@@ -30,4 +29,7 @@ img, object, embed, canvas, video, audio, picture, svg {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+body {
+  background-color: white;
 }
