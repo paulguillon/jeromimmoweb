@@ -9,19 +9,29 @@ type Props = {
 
 const Pagination: FunctionComponent<Props> = ({ perPage, nbProperties, currentPage, paginate }) => {
   const pageNumbers = [];
+  const nbPages = Math.ceil(nbProperties / perPage);
 
-  for (let i = 1; i <= Math.ceil(nbProperties / perPage); i++)
+  for (let i = 1; i <= nbPages; i++)
     pageNumbers.push(i);
 
   return (
-    <nav>
-      <ul className="pg-blue">
-        <li className="page-link" onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}>Previous</li>
-        {pageNumbers.map((index) => (
-          <li className={index === currentPage ? "page-link active" : "page-link"} key={index} onClick={() => paginate(index)}>{index}</li>
-        ))}
-        <li className="page-link" onClick={() => paginate(currentPage === pageNumbers.length ? currentPage : currentPage + 1)}>Next</li>
-      </ul>
+    <nav className="d-flex justify-content-center align-items-center p-3">
+      {/* {pageNumbers.map((index) => (
+        <button type="button" className={"btn btn-rounded" + (index === currentPage ? " btn-primary" : " btn-outline-primary")} key={index} onClick={() => paginate(index)}>{index}</button>
+      ))} */}
+      <button type="button" className="btn btn-primary btn-rounded" disabled={currentPage === 1 ? true : false} onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}>Previous</button>
+      {currentPage > 1 ? (
+        <button type="button" className="btn btn-outline-primary btn-rounded" onClick={() => paginate(currentPage - 1)}>{currentPage - 1}</button>
+      ) : (
+        <span></span>
+      )}
+      <button type="button" className="btn btn-primary btn-rounded" onClick={() => paginate(currentPage)}>{currentPage}</button>
+      {currentPage < nbPages ? (
+        <button type="button" className="btn btn-outline-primary btn-rounded" onClick={() => paginate(currentPage + 1)}>{currentPage + 1}</button>
+      ) : (
+        <span></span>
+      )}
+      <button type="button" className="btn btn-primary btn-rounded" disabled={currentPage === pageNumbers.length ? true : false} onClick={() => paginate(currentPage === pageNumbers.length ? currentPage : currentPage + 1)}>Next</button>
     </nav>
   )
 }

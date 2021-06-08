@@ -2,10 +2,13 @@ import { useState } from 'react';
 import '../../assets/css/login.css';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { FunctionComponent } from 'react';
 
+type Props = {
+    updateToken: Function
+}
 
-
-function Login() {
+const Login: FunctionComponent<Props> = ({ updateToken }) => {
 
     const [user, setUser] = useState({});
     const history = useHistory();
@@ -22,6 +25,7 @@ function Login() {
                 localStorage.setItem('token', data.data.token);
                 if (data.data.status === "success" && (data.data.token_type === "bearer")) {
                     localStorage.token = data.data.token;
+                    updateToken(data.data.token)
                     console.log(localStorage.token);
                     history.push("/");
                 }
@@ -45,7 +49,7 @@ function Login() {
                     </div>
                     <button type="submit" className="center buttonForm">Connexion</button>
                 </form>
-                <a className="mt-4 text-decoration-underline">Mot de passe oublié ?  </a>
+                <a href="/" className="mt-4 text-decoration-underline">Mot de passe oublié ?  </a>
                 <a href="/register" className="mt-2 text-decoration-underline" >S'inscrire</a>
             </div >
         </div >

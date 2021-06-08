@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Properties from "./pages/property/properties";
@@ -16,12 +16,26 @@ import Register from "./components/auth/register";
 import NotFound from "./pages/page-not-found";
 
 const App: FunctionComponent = () => {
+  const [token, setToken] = useState<string | null>(null)
+
+  useEffect(() => {
+    setToken(localStorage.getItem('token'));
+  }, [])
+
+  const updateToken = (token: string) => {
+    setToken(token);
+  }
+
   return (
     <Router>
-      <HeaderNavigation />
+      <HeaderNavigation token={token} />
       <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/logout" component={Logout} />
+        <Route exact path="/login">
+          <Login updateToken={updateToken} />
+        </Route>
+        <Route exact path="/logout">
+          <Logout updateToken={updateToken} />
+        </Route>
         <Route exact path="/register" component={Register} />
         <Route exact path="/profile" />
         <Route exact path="/logout" />

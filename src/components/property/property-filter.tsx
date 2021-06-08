@@ -72,7 +72,6 @@ const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }) => {
         <label>
           Filtre
           <select className="browser-default custom-select" multiple>
-            <option value="">Aucun filtre</option>
             <option value="Jardin">Jardin</option>
             <option value="Piscine">Piscine</option>
             <option value="Garage">Garage</option>

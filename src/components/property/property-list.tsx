@@ -12,15 +12,12 @@ type Props = {
 };
 
 const PropertyList: FunctionComponent<Props> = ({ properties, title }) => {
-
-
-  
   return (
-    <div className="mb-3" style={{ minHeight: "400px", backgroundColor: 'whitesmoke' }}>
+    <div style={{ minHeight: "400px", backgroundColor: 'whitesmoke' }}>
       <div className="container">
         <h2>{title}</h2>
 
-        {Array.isArray(properties) ? (
+        {properties ? (
           properties.length > 0 ? (
             <div className="d-flex flex-wrap justify-content-around">
               {properties.map((property) => (

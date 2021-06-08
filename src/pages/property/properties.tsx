@@ -20,39 +20,43 @@ const Properties: FunctionComponent = () => {
     total: 0,
     properties: []
   });
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [offset, setOffset] = useState(0);
+  const [filters, setFilters] = useState({
+    type: "",
+    min: "",
+    max: "",
+    zipCode: ""
+  });
 
   const perPage = 5;
 
-  const offset = (currentPage - 1) * perPage;
-
   useEffect(() => {
-    PropertyService.getProperties("", "", "", "", perPage.toString(), offset.toString()).then((properties) =>
+    PropertyService.getProperties(filters.type, filters.min, filters.max, filters.zipCode, perPage.toString(), offset.toString()).then((properties) =>
       setProperties(properties)
     );
-  }, [offset]);
+  }, [filters.max, filters.min, filters.type, filters.zipCode, offset]);
 
   const updateFilters = (filtersFromChild: Filters) => {
-    const { type, min, max, zipCode, limit, offset } = filtersFromChild;
+    const { type, min, max, zipCode } = filtersFromChild;
 
-    PropertyService.getProperties(type, min, max, zipCode, limit, offset).then(
-      (properties) => setProperties(properties)
-    );
+    setFilters({
+      type, min, max, zipCode
+    })
+    setCurrentPage(1);
+    setOffset(0);
   };
 
   const paginate = (page: number) => {
     setCurrentPage(page);
+    setOffset((page - 1) * perPage);
   };
 
   return (
     <div>
       <PropertyFilter updateFilters={updateFilters} />
       <PropertyList properties={properties.properties} title="Liste des biens" />
-      {properties ? (
-        <Pagination perPage={perPage} nbProperties={properties.total} currentPage={currentPage} paginate={paginate} />
-      ) : (
-        <div></div>
-      )}
+      <Pagination perPage={perPage} nbProperties={properties.total} currentPage={currentPage} paginate={paginate} />
     </div>
   );
 };
