@@ -1,4 +1,3 @@
-import App from "../App";
 import Property from "../models/property/property";
 import axios from "axios";
 

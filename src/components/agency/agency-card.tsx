@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { useHistory } from 'react-router-dom';
 import Agency from '../../models/agency/agency';
 import '../../assets/css/agency-card.css';
@@ -10,16 +10,7 @@ type Props = {
 
 const AgencyCard: FunctionComponent<Props> = ({ agency, borderColor = '#009688' }) => {
 
-  const [color, setColor] = useState<string>();
   const history = useHistory();
-
-  const showBorder = () => {
-    setColor(borderColor);
-  };
-
-  const hideBorder = () => {
-    setColor('#f5f5f5');
-  };
 
   const goToAgency = (idAgency: number) => {
     history.push(`/agency/${idAgency}`);
@@ -30,7 +21,7 @@ const AgencyCard: FunctionComponent<Props> = ({ agency, borderColor = '#009688' 
       {agency.data.length > 0 && (
         agency.data.map(data => (
           data.keyAgencyData === 'thumbnail' && (
-            <img src={data.valueAgencyData} alt="image" className="card-img-top" />
+            <img key={data.idAgencyData} src={data.valueAgencyData} alt="agencyImage" className="card-img-top" />
           )
         ))
       )}

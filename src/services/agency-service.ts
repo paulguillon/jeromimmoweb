@@ -1,6 +1,4 @@
-import App from "../App";
 import Agency from "../models/agency/agency";
-
 
 export default class AgencyService {
   static getAgencies(): Promise<Agency[]> {

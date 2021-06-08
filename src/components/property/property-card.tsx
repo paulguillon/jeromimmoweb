@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent } from "react";
 import { useHistory } from "react-router-dom";
 import Property from "../../models/property/property";
 import "../../assets/css/property-card.css";
@@ -10,18 +10,8 @@ type Props = {
 
 const PropertyCard: FunctionComponent<Props> = ({
   property,
-  borderColor = "#009688",
 }) => {
-  const [color, setColor] = useState<string>();
   const history = useHistory();
-
-  const showBorder = () => {
-    setColor(borderColor);
-  };
-
-  const hideBorder = () => {
-    setColor("#f5f5f5");
-  };
 
   const goToProperty = (idProperty: number) => {
     history.push(`/property/${idProperty}`);
@@ -34,6 +24,7 @@ const PropertyCard: FunctionComponent<Props> = ({
           (data) =>
             data.keyPropertyData === "thumbnail" && (
               <img
+                key={data.idPropertyData}
                 src={data.valuePropertyData}
                 alt="image_bien"
                 className="card-img-top"
@@ -41,7 +32,8 @@ const PropertyCard: FunctionComponent<Props> = ({
                 style={{ objectFit: "cover" }}
               />
             )
-        )}
+        )
+      }
       <div className="card-body">
         <h5 className="card-title">{property.typeProperty}</h5>
         <p className="card-text">

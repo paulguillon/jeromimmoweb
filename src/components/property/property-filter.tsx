@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useState } from "react";
-import { useHistory } from "react-router-dom";
 import "../../assets/css/property-card.css";
 
 type Params = { updateFilters: Function };
@@ -11,7 +10,6 @@ const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }) => {
     max: 0,
     zipCode: "",
   });
-  const history = useHistory();
 
   const setType = (e: any) => setState({ ...state, type: e.target.value });
   const setMin = (e: any) => setState({ ...state, min: e.target.value });
@@ -34,7 +32,7 @@ const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }) => {
         <label>
           Type de bien
           <select className="browser-default custom-select" onChange={setType}>
-            <option value="" selected>
+            <option value="">
               Tous
             </option>
             <option value="Maison">Maison</option>
@@ -72,8 +70,9 @@ const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }) => {
           <input type="text" min="0" max="999999" onChange={setZipCode} />
         </label>
         <label>
-          Type de bien
+          Filtre
           <select className="browser-default custom-select" multiple>
+            <option value="">Aucun filtre</option>
             <option value="Jardin">Jardin</option>
             <option value="Piscine">Piscine</option>
             <option value="Garage">Garage</option>

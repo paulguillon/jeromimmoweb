@@ -2,7 +2,6 @@ import React, { FunctionComponent, useState, useEffect } from "react";
 import PropertyService from "../services/property-service";
 import PropertyList from "../components/property/property-list";
 import Property from "../models/property/property";
-import Loader from "../components/loader";
 
 const Home: FunctionComponent = () => {
   const [maisons, setMaisons] = useState<Property[] | null>(null);

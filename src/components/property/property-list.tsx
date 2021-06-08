@@ -12,6 +12,9 @@ type Props = {
 };
 
 const PropertyList: FunctionComponent<Props> = ({ properties, title }) => {
+
+
+  
   return (
     <div className="mb-3" style={{ minHeight: "400px", backgroundColor: 'whitesmoke' }}>
       <div className="container">
