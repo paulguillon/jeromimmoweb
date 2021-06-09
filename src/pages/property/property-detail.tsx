@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { RouteComponentProps, Link } from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
 import Property from "../../models/property/property";
 import PropertyCardDetail from "../../components/property/property-card-detail";
 import PropertyService from "../../services/property-service";

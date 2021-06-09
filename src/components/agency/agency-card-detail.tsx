@@ -1,5 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { FunctionComponent } from 'react';
 import Agency from '../../models/agency/agency';
 
 type Props = {
@@ -13,18 +12,15 @@ const AgencyCardDetail: FunctionComponent<Props> = ({ property }) => {
       {property.data.length > 0 && (
         property.data.map(data => (
           data.keyAgencyData === 'thumbnail' && (
-            <img src={data.valueAgencyData} alt="image" className="card-img-top" />
+            <img key={data.idAgencyData} src={data.valueAgencyData} alt="agencyImage" className="card-img-top" />
           )
         ))
       )}
       <div className="card-body">
         <h5 className="card-title">{property.nameAgency}</h5>
         <p className="card-text">
-          
+
         </p>
-       
-       
-        
         <tr>
           <td>Ville</td>
           <td><strong>{property.cityAgency}</strong></td>

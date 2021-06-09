@@ -1,28 +1,53 @@
 import React, { FunctionComponent, useState } from "react";
-import { useHistory } from "react-router-dom";
 import "../../assets/css/property-card.css";
+import PropertyService from "../../services/property-service";
 
 type Params = { updateFilters: Function };
+type Filters = {
+  type: string,
+  min: number,
+  max: number,
+  zipCode: string,
+  tags: Array<string>,
+}
 
 const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }) => {
-  const [state, setState] = useState({
+  const [state, setState] = useState<Filters>({
     type: "",
     min: 0,
     max: 0,
     zipCode: "",
+    tags: [],
   });
-  const history = useHistory();
 
   const setType = (e: any) => setState({ ...state, type: e.target.value });
   const setMin = (e: any) => setState({ ...state, min: e.target.value });
   const setMax = (e: any) => setState({ ...state, max: e.target.value });
   const setZipCode = (e: any) =>
     setState({ ...state, zipCode: e.target.value });
+  const setTags = (e: any) => {
+    type option = {
+      option: HTMLElement,
+      value: string
+    }
+    setState({ ...state, tags: Array.from(e.target.selectedOptions, (option: option) => option.value) });
+  };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     updateFilters(state);
   };
+
+  const getTags = () => {
+    return (
+      <label>
+        Filtre
+        <select className="browser-default custom-select" multiple onChange={setTags}>
+          {PropertyService.getTags().map((tag, index) => (<option key={index} value={tag}>{tag}</option>))}
+        </select>
+      </label>
+    );
+  }
 
   return (
     <div className="p-5 bg-light">
@@ -34,7 +59,7 @@ const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }) => {
         <label>
           Type de bien
           <select className="browser-default custom-select" onChange={setType}>
-            <option value="" selected>
+            <option value="">
               Tous
             </option>
             <option value="Maison">Maison</option>
@@ -71,16 +96,9 @@ const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }) => {
           Code postal
           <input type="text" min="0" max="999999" onChange={setZipCode} />
         </label>
-        <label>
-          Type de bien
-          <select className="browser-default custom-select" multiple>
-            <option value="Jardin">Jardin</option>
-            <option value="Piscine">Piscine</option>
-            <option value="Garage">Garage</option>
-          </select>
-        </label>
+        {getTags()}
         <button type="submit" className="btn btn-info">
-          Recherche
+          Rechercher
         </button>
       </form>
     </div>

@@ -1,4 +1,3 @@
-import App from "../App";
 import Property from "../models/property/property";
 import axios from "axios";
 
@@ -8,6 +7,7 @@ export default class PropertyService {
     min?: string,
     max?: string,
     zipCode?: string,
+    tags?: Array<string>,
     limit?: string,
     offset?: string
   ) {
@@ -17,6 +17,7 @@ export default class PropertyService {
     if (min) filtersArray.push(`minPriceProperty=${min}`);
     if (max) filtersArray.push(`maxPriceProperty=${max}`);
     if (zipCode) filtersArray.push(`zipCodeProperty=${zipCode}`);
+    if (tags) tags.forEach((tag) => filtersArray.push(`${tag}=true`));
     if (limit) filtersArray.push(`limit=${limit}`);
     if (offset) filtersArray.push(`offset=${offset}`);
 
@@ -40,6 +41,9 @@ export default class PropertyService {
     return axios
       .get(`http://jeromimmo.fr/public/index.php/api/v1/properties?q=${term}`)
       .then((response) => response.data);
+  }
+  static getTags(): Array<string> {
+    return ["jardin", "piscine", "sous-sol"];
   }
 
   static isEmpty(data: Object): boolean {
