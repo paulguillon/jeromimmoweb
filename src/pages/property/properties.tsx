@@ -11,34 +11,40 @@ type Filters = {
   min: string;
   max: string;
   zipCode: string;
+  tags: Array<string>;
   limit: string;
   offset: string;
 };
 
 const Properties: FunctionComponent = () => {
+  const perPage = 5;
+  
   const [properties, setProperties] = useState<TypeProperties | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [offset, setOffset] = useState(0);
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<Filters>({
     type: "",
     min: "",
     max: "",
-    zipCode: ""
+    zipCode: "",
+    tags: [],
+    limit: perPage.toString(),
+    offset: ""
   });
 
-  const perPage = 5;
 
   useEffect(() => {
-    PropertyService.getProperties(filters.type, filters.min, filters.max, filters.zipCode, perPage.toString(), offset.toString()).then((properties) =>
+    PropertyService.getProperties(filters.type, filters.min, filters.max, filters.zipCode, filters.tags, perPage.toString(), offset.toString()).then((properties) =>
       setProperties(properties)
     );
-  }, [filters.max, filters.min, filters.type, filters.zipCode, offset]);
+  }, [filters.max, filters.min, filters.tags, filters.type, filters.zipCode, offset]);
 
   const updateFilters = (filtersFromChild: Filters) => {
-    const { type, min, max, zipCode } = filtersFromChild;
+    const { type, min, max, zipCode, tags } = filtersFromChild;
 
     setFilters({
-      type, min, max, zipCode
+      ...filters,
+      type, min, max, zipCode, tags
     })
     setCurrentPage(1);
     setOffset(0);

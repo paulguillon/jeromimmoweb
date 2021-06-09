@@ -9,13 +9,13 @@ const Home: FunctionComponent = () => {
   const [garages, setGarages] = useState<Properties | null>(null);
 
   useEffect(() => {
-    PropertyService.getProperties("Maison", "", "", "", "3", "").then(
+    PropertyService.getProperties("Maison", "", "", "", [], "3", "").then(
       (properties) => setMaisons(properties)
     );
-    PropertyService.getProperties("Appartement", "", "", "", "3", "").then(
+    PropertyService.getProperties("Appartement", "", "", "", [], "3", "").then(
       (properties) => setAppartements(properties)
     );
-    PropertyService.getProperties("Garage", "", "", "", "3", "").then(
+    PropertyService.getProperties("Garage", "", "", "", [], "3", "").then(
       (properties) => setGarages(properties)
     );
   }, []);

@@ -9,7 +9,7 @@ type Props = {
 };
 
 const Pagination: FunctionComponent<Props> = ({ perPage, data, currentPage, paginate }) => {
-  const nbPages = Math.ceil((data ? data.total : 0) / perPage);
+  const nbPages = Math.ceil((data ? (data.total? data.total: 1) : 1) / perPage);
 
   return (
     <nav className="d-flex justify-content-center align-items-center p-3">

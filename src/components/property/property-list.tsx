@@ -21,7 +21,7 @@ const PropertyList: FunctionComponent<Props> = ({ data, title }) => {
 
         {data ? (
           properties ? (
-            <div className="d-flex flex-wrap justify-content-around">
+            <div className="d-flex flex-column flex-wrap justify-content-around">
               {properties.map((property) => (
                 <PropertyCard key={property.idProperty} property={property} />
               ))}
