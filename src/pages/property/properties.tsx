@@ -16,10 +16,7 @@ type Filters = {
 };
 
 const Properties: FunctionComponent = () => {
-  const [properties, setProperties] = useState<TypeProperties>({
-    total: 0,
-    properties: []
-  });
+  const [properties, setProperties] = useState<TypeProperties | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [offset, setOffset] = useState(0);
   const [filters, setFilters] = useState({
@@ -55,8 +52,8 @@ const Properties: FunctionComponent = () => {
   return (
     <div>
       <PropertyFilter updateFilters={updateFilters} />
-      <PropertyList properties={properties.properties} title="Liste des biens" />
-      <Pagination perPage={perPage} nbProperties={properties.total} currentPage={currentPage} paginate={paginate} />
+      <PropertyList data={properties} title="Liste des biens" />
+      <Pagination perPage={perPage} data={properties} currentPage={currentPage} paginate={paginate} />
     </div>
   );
 };

@@ -1,36 +1,35 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import PropertyService from "../services/property-service";
 import PropertyList from "../components/property/property-list";
-import Property from "../models/property/property";
+import Properties from "../models/property/properties";
 
 const Home: FunctionComponent = () => {
-  const [maisons, setMaisons] = useState<Property[] | null>(null);
-  const [appartements, setAppartements] = useState<Property[] | null>(null);
-  const [garages, setGarages] = useState<Property[] | null>(null);
+  const [maisons, setMaisons] = useState<Properties | null>(null);
+  const [appartements, setAppartements] = useState<Properties | null>(null);
+  const [garages, setGarages] = useState<Properties | null>(null);
 
   useEffect(() => {
     PropertyService.getProperties("Maison", "", "", "", "3", "").then(
-      ({properties}) => setMaisons(properties)
+      (properties) => setMaisons(properties)
     );
     PropertyService.getProperties("Appartement", "", "", "", "3", "").then(
-      ({properties}) => setAppartements(properties)
+      (properties) => setAppartements(properties)
     );
     PropertyService.getProperties("Garage", "", "", "", "3", "").then(
-      ({properties}) => setGarages(properties)
+      (properties) => setGarages(properties)
     );
   }, []);
 
   return (
-    <div>
-      <div className="container">
-        <PropertyList key="Maisons" title="Maisons" properties={maisons} />
-        <PropertyList
-          key="Appartements"
-          title="Appartements"
-          properties={appartements}
-        />
-        <PropertyList key="Garages" title="Garages" properties={garages} />
-      </div>
+    <div className="container">
+      <PropertyList key="Maisons" title="Maisons" data={maisons} />
+      <PropertyList
+        key="Appartements"
+        title="Appartements"
+
+        data={appartements}
+      />
+      <PropertyList key="Garages" title="Garages" data={garages} />
     </div>
   );
 };
