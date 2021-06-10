@@ -15,8 +15,8 @@ const PropertyCard: FunctionComponent<Props> = ({ property }) => {
   const getTags = () => {
     const tags = property.data.filter((data) => data.valuePropertyData === "true")
     return (
-      <div>
-        {tags.map((tag) => (<span style={{ backgroundColor: 'lightgray', padding:".3rem 1rem" }} className="text-white rounded-pill d-inline-block mt-2 me-2">{tag.keyPropertyData}</span>))
+      <div className="mt-3">
+        {tags.map((tag) => (<span style={{ backgroundColor: '#68b0ab', padding: ".3rem 1rem" }} className="text-white rounded-pill d-inline-flex mb-2">{tag.keyPropertyData}</span>))
         }
       </div >
     )
@@ -41,23 +41,29 @@ const PropertyCard: FunctionComponent<Props> = ({ property }) => {
         )
       }
       <div className="card-body">
-        <h5 className="card-title">{property.typeProperty}</h5>
-        <p className="card-text">
+        <h4 className="card-title font-weight-bold">{property.typeProperty}</h4>
+        <h5 className="card-text">
           {new Intl.NumberFormat("fr-FR", {
             style: "currency",
             currency: "EUR",
           }).format(Number(property.priceProperty))}
-        </p>
+        </h5>
         {`${property.cityProperty}, ${property.zipCodeProperty}`}
         <p>
         </p>
-        <button
-          className="btn btn-primary"
-          onClick={() => goToProperty(property.idProperty)}
-        >
-          Détail
+        <div id="container-tags">
+          {getTags()}
+        </div>
+        <div id="container-button" className="d-flex justify-content-end">
+          <button
+            className="btn btn-primary"
+            onClick={() => goToProperty(property.idProperty)}
+          >
+            Voir le bien
         </button>
-        {getTags()}
+        </div>
+
+
       </div>
     </div>
   );

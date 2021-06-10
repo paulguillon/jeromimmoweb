@@ -7,7 +7,7 @@ type Props = {
   token: string | null
 }
 
-const HeaderNavigation: FunctionComponent<Props> = ({token}) => {
+const HeaderNavigation: FunctionComponent<Props> = ({ token }) => {
 
   return (
     <nav className="navbar navbar-expand-lg sticky-top">
