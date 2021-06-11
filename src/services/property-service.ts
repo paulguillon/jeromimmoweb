@@ -43,7 +43,7 @@ export default class PropertyService {
       .then((response) => response.data);
   }
   static getTags(): Array<string> {
-    return ["Jardin", "Piscine", "Sous-sol", "Interphone"];
+    return ["Jardin", "Piscine", "Sous-sol", "Interphone", "Cheminée", "Gardien", "Belle vue", "Balcon", "Ascenseur", "Rez-de-chaussée", "Terrasse", "Cave", "Orientation Sud", "Climatisation", "Meublé", "Colocation", "Stationnement", "Plain-pied", "Accessibilité PMR", "Véranda", "Alarme", "Digicode"];
   }
 
   static isEmpty(data: Object): boolean {
