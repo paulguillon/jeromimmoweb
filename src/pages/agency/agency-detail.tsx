@@ -1,10 +1,10 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import { RouteComponentProps } from "react-router-dom";
 import Agency from "../../models/agency/agency";
 import AgencyCardDetail from "../../components/agency/agency-card-detail";
 import AgencyService from "../../services/agency-service";
 import Loader from "../../components/loader";
+import Btn from "../../components/btn";
 
 type Params = { idAgency: string };
 
@@ -12,7 +12,6 @@ const AgencyDetail: FunctionComponent<RouteComponentProps<Params>> = ({
   match,
 }) => {
   const [agency, setAgency] = useState<Agency | null>(null);
-  const history = useHistory();
 
   useEffect(() => {
     AgencyService.getAgency(+match.params.idAgency).then((agency) =>
@@ -25,18 +24,10 @@ const AgencyDetail: FunctionComponent<RouteComponentProps<Params>> = ({
       {agency ? (
         <div>
           <AgencyCardDetail key={agency.idAgency} property={agency} />
-
-          <button
-            className="btn btn-secondary"
-            onClick={() => history.push(`/agencies`)}
-          >
-            Retour
-          </button>
+          <Btn texte="Retour" push="/agencies" />
         </div>
       ) : (
-        <h4 className="center">
-          <Loader />
-        </h4>
+        <Loader />
       )}
     </div>
   );

@@ -1,21 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import { useHistory } from 'react-router-dom';
 import Agency from '../../models/agency/agency';
 import '../../assets/css/agency-card.css';
+import Btn from '../../components/btn';
 
 type Props = {
   agency: Agency,
-  borderColor?: string
 };
 
-const AgencyCard: FunctionComponent<Props> = ({ agency, borderColor = '#009688' }) => {
-
-  const history = useHistory();
-
-  const goToAgency = (idAgency: number) => {
-    history.push(`/agency/${idAgency}`);
-  }
-
+const AgencyCard: FunctionComponent<Props> = ({ agency }) => {
   return (
     <div className="card border p-0 m-5">
       {agency.data.length > 0 && (
@@ -30,7 +22,7 @@ const AgencyCard: FunctionComponent<Props> = ({ agency, borderColor = '#009688' 
         <p className="card-text">
           {agency.zipCodeAgency} {agency.cityAgency}
         </p>
-        <button className="btn btn-primary" onClick={() => goToAgency(agency.idAgency)}>Détail</button>
+        <Btn texte="Détails" push={"/agency/" + agency.idAgency} />
       </div>
     </div>
   );

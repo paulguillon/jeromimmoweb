@@ -4,7 +4,7 @@ import Property from "../../models/property/property";
 import PropertyCardDetail from "../../components/property/property-card-detail";
 import PropertyService from "../../services/property-service";
 import Loader from "../../components/loader";
-import BackBtn from "../../components/back-btn";
+import Btn from "../../components/btn";
 
 type Params = { idProperty: string };
 
@@ -24,7 +24,7 @@ const PropertyDetail: FunctionComponent<RouteComponentProps<Params>> = ({
       {property ? (
         <div>
           <PropertyCardDetail key={property.idProperty} property={property} />
-          <BackBtn />
+          <Btn texte="Retour à la liste" go={-1}/>
         </div>
       ) : (
         <Loader />

@@ -2,15 +2,13 @@ import React, { FunctionComponent } from "react";
 import { useHistory } from "react-router-dom";
 import Property from "../../models/property/property";
 import "../../assets/css/property-card.css";
+import Btn from "../../components/btn";
+
 type Props = {
   property: Property
 }
 const PropertyCard: FunctionComponent<Props> = ({ property }) => {
   const history = useHistory();
-
-  const goToProperty = (idProperty: number) => {
-    history.push(`/property/${idProperty}`);
-  };
 
   const getTags = () => {
     const tags = property.data.filter((data) => data.valuePropertyData === "true")
@@ -55,15 +53,8 @@ const PropertyCard: FunctionComponent<Props> = ({ property }) => {
           {getTags()}
         </div>
         <div id="container-button" className="d-flex justify-content-end">
-          <button
-            className="btn btn-primary"
-            onClick={() => goToProperty(property.idProperty)}
-          >
-            Voir le bien
-        </button>
+          <Btn texte="Voir le bien" push={"/property/" + property.idProperty} />
         </div>
-
-
       </div>
     </div>
   );
