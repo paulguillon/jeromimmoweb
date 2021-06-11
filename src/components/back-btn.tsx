@@ -4,8 +4,8 @@ import { useHistory } from "react-router-dom";
 const BackBtn: FunctionComponent = () => {
   const history = useHistory();
   return (
-    <button className="btn btn-secondary" onClick={() => history.goBack()}>
-      Retour
+    <button className="btn btn-primary " onClick={() => history.goBack()}>
+      Retour liste bien
     </button>
   );
 };

@@ -3,6 +3,8 @@ import '../../assets/css/login.css';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { FunctionComponent } from 'react';
+import jwt_decode from "jwt-decode";
+
 
 type Props = {
     updateToken: Function
@@ -15,22 +17,26 @@ const Login: FunctionComponent<Props> = ({ updateToken }) => {
 
     const handleChange = (e: any) => {
         setUser({ ...user, [e.target.name]: e.target.value })
-        console.log(user)
     };
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
         axios.post("http://jeromimmo.fr/public/index.php/api/v1/login", user)
             .then(data => {
+                console.log(data);
                 localStorage.setItem('token', data.data.token);
-                if (data.data.status === "success" && (data.data.token_type === "bearer")) {
+                if (data.data.status === "success" && data.data.token_type === "bearer") {
+
                     localStorage.token = data.data.token;
-                    updateToken(data.data.token)
-                    console.log(localStorage.token);
+                    updateToken(data.data.token);
+
+                    let token = data.data.token;
+                    let UserInfo: any = jwt_decode(token);
+                    console.log(UserInfo);
                     history.push("/");
                 }
                 if (data.data.message === "Unauthorized") {
-                    history.push("/login?=Unauthorized");
+                    history.push("/login?status=Unauthorized");
                 }
             })
             .catch(err => console.log(err))

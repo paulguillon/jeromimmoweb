@@ -43,7 +43,7 @@ export default class PropertyService {
       .then((response) => response.data);
   }
   static getTags(): Array<string> {
-    return ["jardin", "piscine", "sous-sol"];
+    return ["Jardin", "Piscine", "Sous-sol", "Interphone"];
   }
 
   static isEmpty(data: Object): boolean {
