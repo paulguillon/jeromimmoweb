@@ -3,3 +3,34 @@ footer {
     color: white;
     margin: 0;
 }
+
+#container-footer {
+    display: flex;
+    margin: 25px auto;
+    width: 80%;
+}
+
+#nav-footer {
+    width: 100%;
+    display: flex;
+}
+
+#navList-footer {
+    display: flex;
+    justify-content: left;
+    text-align: left;
+    flex-direction: column;
+}
+
+#logo-footer {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: solid 2px white;
+}
+
+#copyright-footer {
+    background: #68b0ab;
+    padding: 5px 0px;
+}

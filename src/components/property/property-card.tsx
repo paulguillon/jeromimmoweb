@@ -16,7 +16,7 @@ const PropertyCard: FunctionComponent<Props> = ({ property }) => {
     const tags = property.data.filter((data) => data.valuePropertyData === "true")
     return (
       <div className="mt-3">
-        {tags.map((tag) => (<span style={{ backgroundColor: '#68b0ab', padding: ".3rem 1rem" }} className="text-white rounded-pill d-inline-flex mb-2">{tag.keyPropertyData}</span>))
+        {tags.map((tag) => (<span style={{ backgroundColor: '#495464', padding: ".2rem 1rem", fontSize: "12px", margin: "0.2rem" }} className="text-white rounded-pill d-inline-flex mb-2">{tag.keyPropertyData}</span>))
         }
       </div >
     )
@@ -40,7 +40,7 @@ const PropertyCard: FunctionComponent<Props> = ({ property }) => {
             )
         )
       }
-      <div className="card-body">
+      <div className="card-body d-flex justify-content-around flex-column">
         <h4 className="card-title font-weight-bold">{property.typeProperty}</h4>
         <h5 className="card-text">
           {new Intl.NumberFormat("fr-FR", {
@@ -51,21 +51,20 @@ const PropertyCard: FunctionComponent<Props> = ({ property }) => {
         {`${property.cityProperty}, ${property.zipCodeProperty}`}
         <p>
         </p>
-        <div id="container-tags">
+        <div id="container-button" className="d-flex justify-content-between align-items-center">
           {getTags()}
-        </div>
-        <div id="container-button" className="d-flex justify-content-end">
           <button
-            className="btn btn-primary"
+            className="btn text-white"
+            style={{ backgroundColor: "#68b0ab" }}
             onClick={() => goToProperty(property.idProperty)}
           >
             Voir le bien
-        </button>
+          </button>
         </div>
 
 
       </div>
-    </div>
+    </div >
   );
 };
 

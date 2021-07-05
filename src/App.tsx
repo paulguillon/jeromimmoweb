@@ -36,8 +36,11 @@ const App: FunctionComponent = () => {
         <Route exact path="/logout">
           <Logout updateToken={updateToken} />
         </Route>
+        <Route exact path="/condition-general" />
+        <Route exact path="/mentions-legales" />
         <Route exact path="/register" component={Register} />
         <Route exact path="/profile" />
+        <Route exact path="/contact" />
         <Route exact path="/logout" />
         <Route exact path="/properties" component={Properties} />
         <Route path="/property/:idProperty" component={PropertyDetail} />
