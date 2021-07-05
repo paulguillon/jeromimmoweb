@@ -31,7 +31,7 @@ export default class PropertyService {
   static getProperty(idProperty: number): Promise<Property | null> {
     return axios
       .get(
-        `http://jeromimmo.fr/public/index.php/api/v1/properties/${idProperty}`
+        `https://jeromimmo.fr/public/index.php/api/v1/properties/${idProperty}`
       )
       .then((response) => response.data)
       .then((data) => data);
@@ -39,7 +39,7 @@ export default class PropertyService {
 
   static searchProperty(term: string): Promise<Property[]> {
     return axios
-      .get(`http://jeromimmo.fr/public/index.php/api/v1/properties?q=${term}`)
+      .get(`https://jeromimmo.fr/public/index.php/api/v1/properties?q=${term}`)
       .then((response) => response.data);
   }
   static getTags(): Array<string> {
