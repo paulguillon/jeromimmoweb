@@ -31,7 +31,7 @@ export default class PropertyService {
   static getProperty(idProperty: number): Promise<Property | null> {
     return axios
       .get(
-        `http://jeromimmo.fr/public/index.php/api/v1/properties/${idProperty}`
+        `https://jeromimmo.fr/public/index.php/api/v1/properties/${idProperty}`
       )
       .then((response) => response.data)
       .then((data) => data);
@@ -39,11 +39,11 @@ export default class PropertyService {
 
   static searchProperty(term: string): Promise<Property[]> {
     return axios
-      .get(`http://jeromimmo.fr/public/index.php/api/v1/properties?q=${term}`)
+      .get(`https://jeromimmo.fr/public/index.php/api/v1/properties?q=${term}`)
       .then((response) => response.data);
   }
   static getTags(): Array<string> {
-    return ["Jardin", "Piscine", "Sous-sol", "Interphone"];
+    return ["Jardin", "Piscine", "Sous-sol", "Interphone", "Cheminée", "Gardien", "Belle vue", "Balcon", "Ascenseur", "Rez-de-chaussée", "Terrasse", "Cave", "Orientation Sud", "Climatisation", "Meublé", "Colocation", "Stationnement", "Plain-pied", "Accessibilité PMR", "Véranda", "Alarme", "Digicode"];
   }
 
   static isEmpty(data: Object): boolean {

@@ -13,6 +13,7 @@ import "./assets/css/general.css";
 import Login from "./components/auth/login";
 import Logout from './components/auth/logout';
 import Register from "./components/auth/register";
+import Profile from "./components/auth/profile";
 import NotFound from "./pages/page-not-found";
 
 const App: FunctionComponent = () => {
@@ -39,8 +40,9 @@ const App: FunctionComponent = () => {
         <Route exact path="/condition-general" />
         <Route exact path="/mentions-legales" />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/profile" />
-        <Route exact path="/contact" />
+        <Route exact path="/profile">
+          <Profile updateToken={updateToken} />
+        </Route>
         <Route exact path="/logout" />
         <Route exact path="/properties" component={Properties} />
         <Route path="/property/:idProperty" component={PropertyDetail} />
