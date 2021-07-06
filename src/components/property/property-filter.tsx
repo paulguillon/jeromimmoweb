@@ -50,7 +50,7 @@ const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }) => {
   }
 
   return (
-    <div className="p-5 bg-light">
+    <div className="p-5" style={{ backgroundColor: "lightgrey" }}>
       <h1>Filtres</h1>
       <form
         onSubmit={handleSubmit}

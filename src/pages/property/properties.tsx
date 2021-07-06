@@ -17,7 +17,7 @@ type Filters = {
 };
 
 const Properties: FunctionComponent = () => {
-  const perPage = 5;
+  const perPage = 10;
   
   const [properties, setProperties] = useState<TypeProperties | null>(null);
   const [currentPage, setCurrentPage] = useState(1);

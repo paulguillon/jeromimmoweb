@@ -24,7 +24,6 @@ const PropertyDetail: FunctionComponent<RouteComponentProps<Params>> = ({
       {property ? (
         <div>
           <PropertyCardDetail key={property.idProperty} property={property} />
-          <Btn texte="Retour à la liste" go={-1}/>
         </div>
       ) : (
         <Loader />

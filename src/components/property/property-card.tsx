@@ -1,5 +1,5 @@
-import React, { FunctionComponent } from "react";
-import { useHistory } from "react-router-dom";
+import { FunctionComponent } from "react";
+
 import Property from "../../models/property/property";
 import "../../assets/css/property-card.css";
 import Btn from "../../components/btn";
@@ -8,13 +8,15 @@ type Props = {
   property: Property
 }
 const PropertyCard: FunctionComponent<Props> = ({ property }) => {
-  const history = useHistory();
 
   const getTags = () => {
     const tags = property.data.filter((data) => data.valuePropertyData === "true")
+    const lastItem = tags[tags.length - 1];
+    console.log(lastItem);
     return (
       <div className="mt-3">
-        {tags.map((tag) => (<span style={{ backgroundColor: '#495464', padding: ".2rem 1rem", fontSize: "12px", margin: "0.2rem" }} className="text-white rounded-pill d-inline-flex mb-2">{tag.keyPropertyData}</span>))
+        {
+          tags.slice(0, 6).map((tag) => (<span style={{ backgroundColor: '#495464', padding: ".2rem 1rem", fontSize: "12px", margin: "0.2rem" }} className="text-white rounded-pill d-inline-flex mb-2">{tag.keyPropertyData}</span>))
         }
       </div >
     )
