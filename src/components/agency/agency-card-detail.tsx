@@ -2,31 +2,31 @@ import React, { FunctionComponent } from 'react';
 import Agency from '../../models/agency/agency';
 
 type Props = {
-  property: Agency
+  agency: Agency
 };
 
-const AgencyCardDetail: FunctionComponent<Props> = ({ property }) => {
+const AgencyCardDetail: FunctionComponent<Props> = ({ agency }) => {
 
   return (
-    <div className="card border p-0 m-5">
-      {property.data.length > 0 && (
-        property.data.map(data => (
+    <div className=" container border p-0 m-5">
+
+      <h4> Agence {agency.nameAgency}</h4>
+      {agency.data.length > 0 && (
+        agency.data.map(data => (
           data.keyAgencyData === 'thumbnail' && (
             <img key={data.idAgencyData} src={data.valueAgencyData} alt="agencyImage" className="card-img-top" />
           )
         ))
       )}
-      <div className="card-body">
-        <h5 className="card-title">{property.nameAgency}</h5>
-        <p className="card-text">
-
-        </p>
-        <tr>
-          <td>Ville</td>
-          <td><strong>{property.cityAgency}</strong></td>
-        </tr>
-      </div>
+      <ul>
+        <li>Adresse :  Lorem ipsum dolor sit amet.</li>
+        <li>Ville : {agency.cityAgency}</li>
+        <li>Code Postal : {agency.zipCodeAgency}</li>
+        <li>Numéro de téléphone : </li>
+      </ul>
+      <button>Contact L'agence</button>
     </div>
+
   );
 }
 

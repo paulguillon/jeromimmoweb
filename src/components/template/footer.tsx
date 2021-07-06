@@ -12,6 +12,8 @@ function FooterNavigation() {
                         <li><Link to="/mentions-legales" className="text-white">Mentions Légales</Link></li>
                         <li><Link to="/condition-general" className="text-white">CGU/CGV</Link> </li>
                         <li><Link to="/contact" className="text-white">Contact</Link> </li>
+                        <li><Link to="/faq" className="text-white">Faq</Link> </li>
+
                     </ul>
                 </div>
                 <div id="logo-footer">

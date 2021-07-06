@@ -3,6 +3,7 @@ import Property from "../../models/property/property";
 import "../../assets/css/property-card.css";
 import Btn from "../../components/btn";
 import PropertyMap from "../../components/property/property-map";
+import { FacebookIcon, FacebookShareButton, TwitterIcon, TwitterShareButton } from "react-share";
 
 type Props = {
   property: Property
@@ -15,7 +16,7 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
     return (
       <div className="mt-3">
         {
-          tags.map((tag) => (<span style={{ backgroundColor: '#495464', padding: ".2rem 1rem", fontSize: "12px", margin: "0rem 0.2rem" }} className="text-white rounded-pill d-inline-flex mb-2">{tag.keyPropertyData}</span>))
+          tags.map((tag) => (<span style={{ backgroundColor: '#495464', padding: ".2rem 1rem", fontSize: "12px", margin: "0rem 0.2rem" }} className="text-white rounded-pill d-inline-flex mb-2">{tag.keyPropertyData}{tag.valuePropertyData}</span>))
         }
       </div >
     )
@@ -23,10 +24,10 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
 
   return (
     <div className="container mt-5 mb-5">
-      <div className="mt-5 mb-5 p-2 shadow border bg-dark-gray">
+      <div className="mt-5 mb-5 p-2 border bg-dark-gray">
         <Btn texte="Liste des biens" go={-1} />
       </div>
-      <div className="d-flex">
+      <div className="d-flex w-100 shadow-1 bg-white position-relative">
         <div className="w-75 m-2">
           <div className="d-flex border">
             <div className="w-50">
@@ -59,16 +60,28 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
             </div>
           </div>
           <div id="containerMap" className="border">
-            <PropertyMap property={property} />
+            <PropertyMap localisation={property} />
           </div>
         </div>
         <div className="w-25">
-          <div className="w-100 m-2 shadow-1 border">Favoris</div>
-          <div className="w-100 m-2 shadow-1 border">Partage</div>
-          <div className="w-100 m-2 shadow-1 border">Contact Agence</div>
-          <div className="w-100 m-2 shadow-1 border">Contact Agent</div>
+          <div className="position-sticky top-0">
+            <div className="w-100 m-2 shadow-1 d-flex ">
+              <div className="socialBtn">
+                <FacebookShareButton url={"https://www.facebook.com/"}>
+                  <FacebookIcon></FacebookIcon>
+                </FacebookShareButton>
+              </div>
+              <div className="socialBtn">
+                <TwitterShareButton url={"https://twitter.com/home"}>
+                  <TwitterIcon></TwitterIcon>
+                </TwitterShareButton>
+              </div>
+            </div>
+            <div className="w-100 m-2 shadow-1 border">Favoris</div>
+            <div className="w-100 m-2 shadow-1 border">Contact Agence</div>
+            <div className="w-100 m-2 shadow-1 border">Contact Agent</div>
+          </div>
         </div>
-
       </div>
     </div>
   );

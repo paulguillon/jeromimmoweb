@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Properties from "./pages/property/properties";
 import PropertyDetail from "./pages/property/property-detail";
-import AgencyList from "./pages/agency/agency-list";
+import AgencyList from "./pages/agency/agency";
 import AgencyDetail from "./pages/agency/agency-detail";
 
 import HeaderNavigation from "./components/template/navigation";
@@ -31,19 +31,21 @@ const App: FunctionComponent = () => {
     <Router>
       <HeaderNavigation token={token} />
       <Switch>
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/profile">
+          <Profile updateToken={updateToken} />
+        </Route>
         <Route exact path="/login">
           <Login updateToken={updateToken} />
         </Route>
         <Route exact path="/logout">
           <Logout updateToken={updateToken} />
         </Route>
+
         <Route exact path="/condition-general" />
         <Route exact path="/mentions-legales" />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/profile">
-          <Profile updateToken={updateToken} />
-        </Route>
-        <Route exact path="/logout" />
+        <Route exact path="/faq" />
+
         <Route exact path="/properties" component={Properties} />
         <Route path="/property/:idProperty" component={PropertyDetail} />
         <Route exact path="/agencies" component={AgencyList} />

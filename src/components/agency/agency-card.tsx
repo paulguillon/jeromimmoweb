@@ -9,7 +9,7 @@ type Props = {
 
 const AgencyCard: FunctionComponent<Props> = ({ agency }) => {
   return (
-    <div className="card border p-0 m-5">
+    <div className="card border p-0">
       {agency.data.length > 0 && (
         agency.data.map(data => (
           data.keyAgencyData === 'thumbnail' && (
@@ -18,11 +18,12 @@ const AgencyCard: FunctionComponent<Props> = ({ agency }) => {
         ))
       )}
       <div className="card-body">
-        <h5 className="card-title">{agency.nameAgency}</h5>
+        <h4>{agency.nameAgency}</h4>
+
         <p className="card-text">
-          {agency.zipCodeAgency} {agency.cityAgency}
+          Adresse :  {agency.cityAgency},  {agency.zipCodeAgency}
         </p>
-        <Btn texte="Détails" push={"/agency/" + agency.idAgency} />
+        <Btn texte="Voir les détails" push={"/agency/" + agency.idAgency} />
       </div>
     </div>
   );

@@ -29,9 +29,10 @@ const HeaderNavigation: FunctionComponent<Props> = ({ token }) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto">
             <li><Link to="/">Accueil</Link></li>
-            <li><Link to="/properties">Liste propriétés</Link></li>
-            <li><Link to="/agencies">Liste des agences</Link></li>
+            <li><Link to="/properties">Immobilier</Link></li>
+            <li><Link to="/agencies">Agences</Link></li>
             <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/faq">Faq</Link></li>
           </ul>
 
           {token ? (

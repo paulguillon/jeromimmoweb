@@ -23,8 +23,8 @@ const AgencyDetail: FunctionComponent<RouteComponentProps<Params>> = ({
     <div>
       {agency ? (
         <div>
-          <AgencyCardDetail key={agency.idAgency} property={agency} />
-          <Btn texte="Retour" push="/agencies" />
+          <AgencyCardDetail key={agency.idAgency} agency={agency} />
+          {/* <Btn texte="Retour" push="/agencies" /> */}
         </div>
       ) : (
         <Loader />
