@@ -15,7 +15,7 @@ import Logout from './components/auth/logout';
 import Register from "./components/auth/register";
 import Profile from "./components/auth/profile";
 import NotFound from "./pages/page-not-found";
-import Contact from "./pages/contact";
+import Contact from "./pages/contact/contact";
 
 const App: FunctionComponent = () => {
   const [token, setToken] = useState<string | null>(null)
