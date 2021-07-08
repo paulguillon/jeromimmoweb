@@ -4,11 +4,21 @@ import { useEffect, useState } from 'react';
 import { FunctionComponent } from 'react';
 import User from '../../models/user/user';
 import UserService from '../../services/user-service';
+import Visit from '../../models/visit/visit';
+import VisitService from '../../services/visit-service';
 import jwt_decode from "jwt-decode";
 import { useHistory } from 'react-router';
+import VisitData from '../../models/visit/visitData';
 
 type Props = {
   updateToken: Function
+}
+
+type VisitPromise = {
+  total: number,
+  visits: Visit[],
+  message: string,
+  status: string
 }
 
 const Profile: FunctionComponent<Props> = ({ updateToken }) => {
@@ -27,8 +37,12 @@ const Profile: FunctionComponent<Props> = ({ updateToken }) => {
     data: []
   });
 
+  const [visits, setVisits] = useState<VisitPromise>();
+
   const token: string = localStorage.token;
   const UserInfo: any = jwt_decode(token);
+
+  //deconnexion automatique après une heure
   const timeSinceLogedIn: number = new Date().getTime() - new Date(UserInfo.exp * 1000).getTime();
   if (timeSinceLogedIn / 1000 / 3600 > 1) {
     updateToken(token);
@@ -37,6 +51,7 @@ const Profile: FunctionComponent<Props> = ({ updateToken }) => {
 
   useEffect(() => {
     UserService.getUser(token, UserInfo.idUser).then((user) => setState(user))
+    VisitService.getVisits(token).then((data) => setVisits(data))
   }, [UserInfo.idUser, token])
 
   const handleChange = (e: any) => {
@@ -53,6 +68,10 @@ const Profile: FunctionComponent<Props> = ({ updateToken }) => {
 
     UserService.updateUser(token, state).then(resp => console.log(resp));
   };
+
+  const getData = (data: Array<VisitData>, name: string) => {
+    return data.filter((data) => data.keyVisitData === name)[0].valueVisitData
+  }
 
   return (
     <div className="m-auto w-75 container-form">
@@ -73,6 +92,16 @@ const Profile: FunctionComponent<Props> = ({ updateToken }) => {
             <button type="submit" className="center buttonForm">Modifier</button>
           </div>
         </form>
+        <details>
+          <summary>Mes rendez-vous</summary>
+          {visits ? (
+            visits.visits.map((visit) => (
+              <p>{visit.dateVisit} : {getData(visit.data, "titre")}{console.log(getData(visit.data, "id"))}</p>
+            ))
+          ) : (
+            null
+          )}
+        </details>
       </div>
     </div>
   )
