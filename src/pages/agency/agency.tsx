@@ -13,17 +13,17 @@ const AgencyList: FunctionComponent = () => {
 
   return (
     <div>
-      <div className="text-center bg-black">
+      <header className="text-center bg-black">
         <h2> Texte Présentation + image de fond</h2>
         <h4>Contactez-nous btn</h4>
-      </div>
+      </header>
 
       <div className="container mt-5">
 
         <h3>Liste de nos agences en France :</h3>
 
         {agencies ? (
-          <div className="row justify-content-start flex-wrap">
+          <div className="row justify-content-between flex-wrap">
             {agencies.map(agency => (
               <AgencyCard key={agency.idAgency} agency={agency} />
             ))}

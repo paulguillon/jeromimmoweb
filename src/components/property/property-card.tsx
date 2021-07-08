@@ -23,8 +23,9 @@ const PropertyCard: FunctionComponent<Props> = ({ property }) => {
   }
 
   return (
-    <div className="card d-flex flex-row border p-0 w-100" style={{ height: "200px" }}>
-      {property.data.length > 0 &&
+    <div id="containerPropertyCard" className="card d-flex flex-row border p-0 w-auto" style={{ height: "200px" }}>
+      {
+        property.data.length > 0 &&
         property.data.map(
           (data) =>
             data.keyPropertyData === "thumbnail" && (

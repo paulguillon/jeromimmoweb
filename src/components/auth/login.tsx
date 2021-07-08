@@ -31,7 +31,7 @@ const Login: FunctionComponent<Props> = ({ updateToken }) => {
 
                     let token = data.data.token;
                     let UserInfo: any = jwt_decode(token);
-                    console.log(UserInfo);
+                    
                     history.push("/");
                 }
                 if (data.data.message === "Unauthorized") {

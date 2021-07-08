@@ -17,7 +17,6 @@ const PropertyList: FunctionComponent<Props> = ({ data, title }) => {
   return (
     <div style={{ minHeight: "400px", backgroundColor: 'whitesmoke' }}>
       <div className="container p-5">
-
         <h2 className="my-4">{title} :</h2>
 
         {data ? (

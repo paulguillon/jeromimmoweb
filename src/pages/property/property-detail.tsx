@@ -4,7 +4,7 @@ import Property from "../../models/property/property";
 import PropertyCardDetail from "../../components/property/property-card-detail";
 import PropertyService from "../../services/property-service";
 import Loader from "../../components/loader";
-import Btn from "../../components/btn";
+
 
 type Params = { idProperty: string };
 

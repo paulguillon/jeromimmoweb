@@ -15,6 +15,7 @@ import Logout from './components/auth/logout';
 import Register from "./components/auth/register";
 import Profile from "./components/auth/profile";
 import NotFound from "./pages/page-not-found";
+import Contact from "./pages/contact";
 
 const App: FunctionComponent = () => {
   const [token, setToken] = useState<string | null>(null)
@@ -44,7 +45,9 @@ const App: FunctionComponent = () => {
 
         <Route exact path="/condition-general" />
         <Route exact path="/mentions-legales" />
+        <Route exact path="/contact" component={Contact} />
         <Route exact path="/faq" />
+        <Route exact path="/favoris" />
 
         <Route exact path="/properties" component={Properties} />
         <Route path="/property/:idProperty" component={PropertyDetail} />
