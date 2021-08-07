@@ -1,8 +1,10 @@
 import Property from "../models/property/property";
 import axios from "axios";
+import PropertyData from "../models/property/propertyData";
+import Properties from "../models/property/properties";
 
 export default class PropertyService {
-  static getProperties(
+  static async getProperties(
     type?: string,
     min?: string,
     max?: string,
@@ -10,7 +12,7 @@ export default class PropertyService {
     tags?: Array<string>,
     limit?: string,
     offset?: string
-  ) {
+  ): Promise<Properties> {
     let filtersArray = [];
 
     if (type) filtersArray.push(`typeProperty=${type}`);
@@ -23,23 +25,35 @@ export default class PropertyService {
 
     let filters = "?" + filtersArray.join("&");
 
-    return axios
-      .get(`http://jeromimmo.fr/public/index.php/api/v1/properties${filters}`)
-      .then((res) => res.data);
+    const promise = await axios(`https://jeromimmo.fr/api/v1/properties${filters}`);
+    const result = await promise.data;
+    return result;
   }
 
-  static getProperty(idProperty: number): Promise<Property | null> {
+  static getProperty(idProperty: number): Promise<Property> {
     return axios
       .get(
-        `https://jeromimmo.fr/public/index.php/api/v1/properties/${idProperty}`
+        `https://jeromimmo.fr/api/v1/properties/${idProperty}`
       )
       .then((response) => response.data)
       .then((data) => data);
   }
 
+  static async getAllData(idProperty: number): Promise<Array<PropertyData>> {
+    const promise = await axios(`https://jeromimmo.fr/api/v1/properties/${idProperty}/data`);
+    const result = await promise.data;
+    return result.data;
+  }
+
+  static async getData(idProperty: number, key: string): Promise<PropertyData> {
+    const promise = await axios(`https://jeromimmo.fr/api/v1/properties/${idProperty}/data/${key}`);
+    const result = await promise.data;
+    return result;
+  }
+
   static searchProperty(term: string): Promise<Property[]> {
     return axios
-      .get(`https://jeromimmo.fr/public/index.php/api/v1/properties?q=${term}`)
+      .get(`https://jeromimmo.fr/api/v1/properties?q=${term}`)
       .then((response) => response.data);
   }
   static getTags(): Array<string> {

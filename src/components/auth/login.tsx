@@ -21,7 +21,7 @@ const Login: FunctionComponent<Props> = ({ updateToken }) => {
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        axios.post("http://jeromimmo.fr/public/index.php/api/v1/login", user)
+        axios.post("https://jeromimmo.fr/api/v1/login", user)
             .then(data => {
                 localStorage.setItem('token', data.data.token);
                 if (data.data.status === "success" && data.data.token_type === "bearer") {

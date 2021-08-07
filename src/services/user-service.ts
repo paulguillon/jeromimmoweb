@@ -5,7 +5,7 @@ export default class UserService {
 
   static async getUser(token: string, idUser: number): Promise<User> {
     const resp = await axios
-      .get(`https://jeromimmo.fr/public/index.php/api/v1/users/${idUser}`, {
+      .get(`https://jeromimmo.fr/api/v1/users/${idUser}`, {
         headers: {
           Authorization: 'Bearer ' + token
         }
@@ -16,7 +16,7 @@ export default class UserService {
   static async updateUser(token: string, user: User): Promise<User> {
     const resp = await axios({
       method: 'PATCH',
-      url: `https://jeromimmo.fr/public/index.php/api/v1/users/${user.idUser}`,
+      url: `https://jeromimmo.fr/api/v1/users/${user.idUser}`,
       headers: {
         Authorization: 'Bearer ' + token,
       },

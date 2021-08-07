@@ -1,5 +1,5 @@
-import { FunctionComponent, useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { FunctionComponent, useState } from "react";
+import { BrowserRouter as Router, Switch, Route, useHistory } from "react-router-dom";
 import Home from "./pages/home";
 import Properties from "./pages/property/properties";
 import PropertyDetail from "./pages/property/property-detail";
@@ -17,15 +17,30 @@ import Profile from "./components/auth/profile";
 import NotFound from "./pages/page-not-found";
 import Contact from "./pages/contact/contact";
 
-const App: FunctionComponent = () => {
-  const [token, setToken] = useState<string | null>(null)
+import jwt_decode from "jwt-decode";
 
-  useEffect(() => {
-    setToken(localStorage.getItem('token'));
-  }, [])
+const App: FunctionComponent = () => {
+  const history = useHistory();
+
+  if (!localStorage.token)
+    history.push('/login');
+
+  const [token, setToken] = useState<string>(localStorage.token)
 
   const updateToken = (token: string) => {
     setToken(token);
+  }
+
+  if (token) {
+    const UserInfo: any = jwt_decode(token);
+
+    //deconnexion automatique après 24 heures
+    let currentTime = new Date().getTime();
+    let timeSinceLoggedIn = (currentTime - new Date(UserInfo.iat * 1000).getTime()) / 1000 / 3600;
+    if (timeSinceLoggedIn > 24) {
+      setToken("");
+      history.push("/logout");
+    }
   }
 
   return (
@@ -33,9 +48,7 @@ const App: FunctionComponent = () => {
       <HeaderNavigation token={token} />
       <Switch>
         <Route exact path="/register" component={Register} />
-        <Route exact path="/profile">
-          <Profile updateToken={updateToken} />
-        </Route>
+        <Route exact path="/profile" component={Profile} />
         <Route exact path="/login">
           <Login updateToken={updateToken} />
         </Route>

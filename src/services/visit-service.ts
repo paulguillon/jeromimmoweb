@@ -1,46 +1,54 @@
+import Visits from "../models/visit/visits";
 import Visit from "../models/visit/visit";
 import axios from "axios";
-
-type VisitPromise = {
-  total: number,
-  visits: Visit[],
-  message: string,
-  status: string
-}
-
+import VisitData from "../models/visit/visitData";
 export default class VisitService {
-  static async getVisits(token: string): Promise<VisitPromise> {
+  static async getVisits(token: string): Promise<Visits> {
+    //visits
     const resp = await axios({
       method: 'GET',
-      url: `https://jeromimmo.fr/public/index.php/api/v1/visits`,
+      url: `https://jeromimmo.fr/api/v1/visits`,
       headers: {
         Authorization: 'Bearer ' + token,
       }
     });
-    const data = await resp.data;
-
-    for (let i = 0; i < data.visits.length; i++) {
-      let element = data.visits[i];
-      const respData = await axios({
-        method: 'GET',
-        url: `https://jeromimmo.fr/public/index.php/api/v1/visits/${element.idVisit}/data`,
-        headers: {
-          Authorization: 'Bearer ' + token,
-        }
-      });
-      const dataData = await respData.data;
-      element.data = dataData.data;
-    }
-
-    return data;
+    const result = await resp.data;
+    return result;
   }
 
-  static getVisit(idVisit: number): Promise<Visit | null> {
-    return axios
-      .get(
-        `https://jeromimmo.fr/public/index.php/api/v1/visit/${idVisit}`
-      )
-      .then((response) => response.data)
-      .then((data) => data);
+  static async getVisit(idVisit: number, token: string): Promise<Visit | null> {
+    const promise = await axios({
+      method: 'GET',
+      url: `https://jeromimmo.fr/api/v1/visits/${idVisit}`,
+      headers: {
+        Authorization: 'Bearer ' + token,
+      }
+    });
+    const result = await promise.data;
+    return result;
+  }
+
+  static async getAllData(idVisit: number, token: string): Promise<Array<VisitData>> {
+    const promise = await axios({
+      method: 'GET',
+      url: `https://jeromimmo.fr/api/v1/visits/${idVisit}/data`,
+      headers: {
+        Authorization: 'Bearer ' + token,
+      }
+    });
+    const result = await promise.data;
+    return result.data;
+  }
+
+  static async getData(idVisit: number, key: string, token: string): Promise<VisitData> {
+    const promise = await axios({
+      method: 'GET',
+      url: `https://jeromimmo.fr/api/v1/visits/${idVisit}/data/${key}`,
+      headers: {
+        Authorization: 'Bearer ' + token,
+      }
+    });
+    const result = await promise.data;
+    return result.data;
   }
 }

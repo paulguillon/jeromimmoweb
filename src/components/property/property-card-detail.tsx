@@ -1,5 +1,5 @@
 
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import Property from "../../models/property/property";
 import "../../assets/css/property-card.css";
 import Btn from "../../components/btn";
@@ -7,6 +7,8 @@ import PropertyMap from "../../components/property/property-map";
 import PropertyFav from "../../components/property/property-favoris";
 
 import { FacebookIcon, FacebookShareButton, TwitterIcon, TwitterShareButton } from "react-share";
+import PropertyData from "../../models/property/propertyData";
+import PropertyService from "../../services/property-service";
 
 
 
@@ -15,12 +17,20 @@ type Props = {
 };
 
 const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
+  const [allData, setAllData] = useState<Array<PropertyData> | null>(null);
+
+  useEffect(() => {
+    PropertyService.getAllData(property.idProperty).then(
+      (data) => setAllData(data)
+    );
+  }, [property.idProperty]);
+  
   const getTags = () => {
-    const tags = property.data.filter((data) => data.valuePropertyData === "true")
+    const tags = allData?.filter((data) => data.valuePropertyData === "true")
     return (
       <div className="mt-3">
         {
-          tags.map((tag) => (<span style={{ backgroundColor: '#495464', padding: ".2rem 1rem", fontSize: "12px", margin: "0rem 0.2rem" }} className="text-white rounded-pill d-inline-flex mb-2">{tag.keyPropertyData}</span>))
+          tags?.map((tag) => (<span style={{ backgroundColor: '#495464', padding: ".2rem 1rem", fontSize: "12px", margin: "0rem 0.2rem" }} className="text-white rounded-pill d-inline-flex mb-2">{tag.keyPropertyData}</span>))
         }
       </div >
     )
@@ -35,8 +45,8 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
         <div className="w-75 m-2">
           <div className="d-flex border">
             <div className="w-50">
-              {property.data.length > 0 && (
-                property.data.map(data => (
+              {allData && (
+                allData?.map(data => (
                   data.keyPropertyData === 'thumbnail' && (
                     <img key={data.idPropertyData} src={data.valuePropertyData} alt="propertyImage" className="card-img-top" />
                   )

@@ -3,13 +3,11 @@ import PropertyService from "../services/property-service";
 import PropertyList from "../components/property/property-list";
 import Properties from "../models/property/properties";
 
-
-
-
 const Home: FunctionComponent = () => {
-  const [maisons, setMaisons] = useState<Properties | null>(null);
-  const [appartements, setAppartements] = useState<Properties | null>(null);
-  const [garages, setGarages] = useState<Properties | null>(null);
+  const [maisons, setMaisons] = useState<Properties>({ total: 0, properties: [] });
+  const [appartements, setAppartements] = useState<Properties>({ total: 0, properties: [] });
+  const [garages, setGarages] = useState<Properties>({ total: 0, properties: [] });
+  const [terrains, setTerrains] = useState<Properties>({ total: 0, properties: [] });
 
   useEffect(() => {
     PropertyService.getProperties("Maison", "", "", "", [], "3", "").then(
@@ -21,21 +19,24 @@ const Home: FunctionComponent = () => {
     PropertyService.getProperties("Garage", "", "", "", [], "3", "").then(
       (properties) => setGarages(properties)
     );
+    PropertyService.getProperties("Terrain", "", "", "", [], "3", "").then(
+      (properties) => setTerrains(properties)
+    );
   }, []);
-
+  
   return (
     <div>
       <header className="text-center p-5 bg-black text-white">
-        <h1>Banniere accueil</h1>
+        <h1>Nouveautés</h1>
       </header>
       <div className="container">
-        <PropertyList key="Maisons" title="Maisons" data={maisons} />
         <PropertyList
           key="Appartements"
           title="Appartements"
-
           data={appartements}
         />
+        <PropertyList key="Maisons" title="Maisons" data={maisons} />
+        <PropertyList key="Terrains" title="Terrains" data={terrains} />
         <PropertyList key="Garages" title="Garages" data={garages} />
       </div>
     </div>

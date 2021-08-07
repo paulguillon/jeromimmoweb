@@ -19,7 +19,7 @@ type Filters = {
 const Properties: FunctionComponent = () => {
   const perPage = 10;
   
-  const [properties, setProperties] = useState<TypeProperties | null>(null);
+  const [properties, setProperties] = useState<TypeProperties>({ total: 0, properties: [] });
   const [currentPage, setCurrentPage] = useState(1);
   const [offset, setOffset] = useState(0);
   const [filters, setFilters] = useState<Filters>({

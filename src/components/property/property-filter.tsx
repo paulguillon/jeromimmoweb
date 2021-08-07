@@ -62,8 +62,9 @@ const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }) => {
             <option value="">
               Tous
             </option>
-            <option value="Maison">Maison</option>
             <option value="Appartement">Appartement</option>
+            <option value="Maison">Maison</option>
+            <option value="Terrain">Terrain</option>
             <option value="Garage">Garage</option>
           </select>
         </label>

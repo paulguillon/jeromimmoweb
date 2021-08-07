@@ -1,32 +1,43 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 
 import Property from "../../models/property/property";
 import "../../assets/css/property-card.css";
 import Btn from "../../components/btn";
+import PropertyData from "../../models/property/propertyData";
+import PropertyService from "../../services/property-service";
 
 type Props = {
   property: Property
 }
 const PropertyCard: FunctionComponent<Props> = ({ property }) => {
+  const [allData, setAllData] = useState<Array<PropertyData> | null>(null);
+
+  useEffect(() => {
+    PropertyService.getAllData(property.idProperty).then(
+      (data) => setAllData(data)
+    );
+  }, [property.idProperty]);
 
   const getTags = () => {
-    const tags = property.data.filter((data) => data.valuePropertyData === "true")
-    const lastItem = tags[tags.length - 1];
-    console.log(lastItem);
+    const tags = allData?.filter((data) => data.valuePropertyData === "true")
     return (
       <div className="mt-3">
         {
-          tags.slice(0, 6).map((tag) => (<span style={{ backgroundColor: '#495464', padding: ".2rem 1rem", fontSize: "12px", margin: "0.2rem" }} className="text-white rounded-pill d-inline-flex mb-2">{tag.keyPropertyData}</span>))
+          tags?.slice(0, 6).map(
+            (tag) => (
+              <span style={{ backgroundColor: '#495464', padding: ".2rem 1rem", fontSize: "12px", margin: "0.2rem" }} className="text-white rounded-pill d-inline-flex mb-2">{tag.keyPropertyData}</span>
+            )
+          )
         }
       </div >
     )
   }
-
+  
   return (
     <div id="containerPropertyCard" className="card d-flex flex-row border p-0 w-auto" style={{ height: "200px" }}>
       {
-        property.data.length > 0 &&
-        property.data.map(
+        allData &&
+        allData.map(
           (data) =>
             data.keyPropertyData === "thumbnail" && (
               <div style={{ maxWidth: "250px" }}>

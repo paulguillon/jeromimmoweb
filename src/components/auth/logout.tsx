@@ -9,7 +9,7 @@ type Props = {
 const Logout: FunctionComponent<Props> = ({ updateToken }) => {
     const history = useHistory();
 
-    updateToken(null)
+    updateToken("")
     window.localStorage.removeItem("token");
 
     history.push('/');
