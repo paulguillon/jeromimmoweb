@@ -40,7 +40,6 @@ const Profile: FunctionComponent = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    console.log("submitted");
 
     e.target.forEach((input: HTMLInputElement) => {
       setState({ ...state, [input.name]: input.value })
@@ -76,10 +75,10 @@ const Profile: FunctionComponent = () => {
                 <tr>
                   <th>Date</th>
                   <th>Sujet</th>
-                  <th>Propiété</th>
                   <th>Agent</th>
                   <th>Agence</th>
                   <th>Commentaire</th>
+                  <th>Propiété</th>
                 </tr>
               </thead>
               <tbody>

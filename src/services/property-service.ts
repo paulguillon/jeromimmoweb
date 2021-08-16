@@ -48,7 +48,7 @@ export default class PropertyService {
   static async getData(idProperty: number, key: string): Promise<PropertyData> {
     const promise = await axios(`https://jeromimmo.fr/api/v1/properties/${idProperty}/data/${key}`);
     const result = await promise.data;
-    return result;
+    return result.data;
   }
 
   static searchProperty(term: string): Promise<Property[]> {

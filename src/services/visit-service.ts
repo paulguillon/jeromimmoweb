@@ -41,14 +41,14 @@ export default class VisitService {
   }
 
   static async getData(idVisit: number, key: string, token: string): Promise<VisitData> {
-    const promise = await axios({
-      method: 'GET',
-      url: `https://jeromimmo.fr/api/v1/visits/${idVisit}/data/${key}`,
-      headers: {
-        Authorization: 'Bearer ' + token,
-      }
-    });
-    const result = await promise.data;
-    return result.data;
+      const promise = await axios({
+        method: 'GET',
+        url: `https://jeromimmo.fr/api/v1/visits/${idVisit}/data/${key}`,
+        headers: {
+          Authorization: 'Bearer ' + token,
+        }
+      });
+      const result = await promise.data;
+      return result.data;
   }
 }
