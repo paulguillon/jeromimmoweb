@@ -8,6 +8,7 @@ import Visits from '../../models/visit/visits';
 import VisitService from '../../services/visit-service';
 import jwt_decode from "jwt-decode";
 import VisitDetail from '../visit/visit-detail';
+import Loader from '../loader';
 
 const Profile: FunctionComponent = () => {
 
@@ -31,7 +32,7 @@ const Profile: FunctionComponent = () => {
 
   useEffect(() => {
     UserService.getUser(token, UserInfo.idUser).then(data => setState(data))
-    VisitService.getVisits(token).then(visits => setVisits(visits))
+    VisitService.getVisits(token, UserInfo.idUser).then(visits => setVisits(visits))
   }, [UserInfo.idUser, token])
 
   const handleChange = (e: any) => {
@@ -70,31 +71,34 @@ const Profile: FunctionComponent = () => {
         <details>
           <summary>Mes rendez-vous</summary>
           {visits ? (
-            <table>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Sujet</th>
-                  <th>Agent</th>
-                  <th>Agence</th>
-                  <th>Commentaire</th>
-                  <th>Propiété</th>
-                </tr>
-              </thead>
-              <tbody>
-                {visits.visits.map(
-                  visit => (
-                    <VisitDetail key={visit.idVisit} visit={visit} token={token} />
-                  )
-                )}
-              </tbody>
-            </table>
+            visits.visits.length > 0 ? (
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Sujet</th>
+                    <th>Agent</th>
+                    <th>Agence</th>
+                    <th>Commentaire</th>
+                    <th>Propiété</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {visits.visits.map(
+                    visit => (
+                      <VisitDetail key={visit.idVisit} visit={visit} token={token} />
+                    ))}
+                </tbody>
+              </table>
+            ) : (
+              <div className="d-flex justify-content-center align-items-center" style={{ height: "400px" }}>
+                <h4 className="center">
+                  Vous n'avez aucun rendez-vous
+                </h4>
+              </div>
+            )
           ) : (
-            <div className="d-flex justify-content-center align-items-center" style={{ height: "400px" }}>
-              <h4 className="center">
-                Vous n'avez aucun rendez-vous
-              </h4>
-            </div>
+            <Loader />
           )}
         </details>
       </div>

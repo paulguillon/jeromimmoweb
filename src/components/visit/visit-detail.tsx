@@ -1,5 +1,4 @@
 
-import { Agent } from "node:http";
 import { FunctionComponent, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Visit from "../../models/visit/visit";
@@ -31,7 +30,7 @@ const VisitDetail: FunctionComponent<Props> = ({ visit, token }) => {
     //get all ids related to this visit
     VisitService.getData(visit.idVisit, "id", token).then(data => setListId(JSON.parse(data?.valueVisitData)));
 
-    //get property
+    //get property image
     PropertyService.getData(listId?.idProperty, "thumbnail").then(data => setPropertyPic(data?.valuePropertyData));
     //get name of the agent
     UserService.getUser(token, listId?.idAgent).then(data => setNomAgent(data.lastnameUser + " " + data.firstnameUser[0].toUpperCase()));

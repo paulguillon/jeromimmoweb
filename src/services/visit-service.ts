@@ -3,11 +3,11 @@ import Visit from "../models/visit/visit";
 import axios from "axios";
 import VisitData from "../models/visit/visitData";
 export default class VisitService {
-  static async getVisits(token: string): Promise<Visits> {
+  static async getVisits(token: string, idUser: number): Promise<Visits> {
     //visits
     const resp = await axios({
       method: 'GET',
-      url: `https://jeromimmo.fr/api/v1/visits`,
+      url: `https://jeromimmo.fr/api/v1/users/${idUser}/visits`,
       headers: {
         Authorization: 'Bearer ' + token,
       }
