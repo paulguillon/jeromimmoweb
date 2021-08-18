@@ -9,6 +9,8 @@ import VisitService from '../../services/visit-service';
 import jwt_decode from "jwt-decode";
 import VisitDetail from '../visit/visit-detail';
 import Loader from '../loader';
+import FavoriteService from '../../services/favorite-service';
+import Favorite from '../../models/favorite/favorite';
 
 const Profile: FunctionComponent = () => {
 
@@ -26,6 +28,7 @@ const Profile: FunctionComponent = () => {
   });
 
   const [visits, setVisits] = useState<Visits>({ total: 0, visits: [] });
+  const [favorites, setFavorites] = useState<Favorite[]>([]);
 
   const token: string = localStorage.token;
   const UserInfo: any = jwt_decode(token);
@@ -33,6 +36,7 @@ const Profile: FunctionComponent = () => {
   useEffect(() => {
     UserService.getUser(token, UserInfo.idUser).then(data => setState(data))
     VisitService.getVisits(token, UserInfo.idUser).then(visits => setVisits(visits))
+    FavoriteService.getFavorites(token, UserInfo.idUser).then(data => setFavorites(data))
   }, [UserInfo.idUser, token])
 
   const handleChange = (e: any) => {
@@ -46,7 +50,7 @@ const Profile: FunctionComponent = () => {
       setState({ ...state, [input.name]: input.value })
     });
 
-    UserService.updateUser(token, state).then(resp => console.log(resp));
+    UserService.updateUser(token, state).then(resp => setState(resp));
   };
 
   return (
@@ -100,6 +104,12 @@ const Profile: FunctionComponent = () => {
           ) : (
             <Loader />
           )}
+        </details>
+        <details>
+          <summary>Mes favoris</summary>
+          {favorites.map((favorite) => (
+            <span>{favorite.idProperty}</span>
+          ))}
         </details>
       </div>
     </div>

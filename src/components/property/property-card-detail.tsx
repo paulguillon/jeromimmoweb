@@ -4,7 +4,6 @@ import Property from "../../models/property/property";
 import "../../assets/css/property-card.css";
 import Btn from "../../components/btn";
 import PropertyMap from "../../components/property/property-map";
-import PropertyFav from "../../components/property/property-favoris";
 
 import { FacebookIcon, FacebookShareButton, TwitterIcon, TwitterShareButton } from "react-share";
 import PropertyData from "../../models/property/propertyData";
@@ -56,9 +55,6 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
 
             </div>
             <div className="w-50 d-flex align-items-center justify-content-center flex-column position-relative ">
-              <div className="shadow-1 border position-absolute top-0 end-0">
-                <PropertyFav favoris={property} />
-              </div>
               <h3 className="font-weight-bold" >
                 {new Intl.NumberFormat("fr-FR", {
                   style: "currency",

@@ -5,18 +5,24 @@ import "../../assets/css/property-card.css";
 import Btn from "../../components/btn";
 import PropertyData from "../../models/property/propertyData";
 import PropertyService from "../../services/property-service";
+import jwt_decode from "jwt-decode";
+import FavoriteService from "../../services/favorite-service";
+import FavBtn from "../favorite/fav-btn";
 
 type Props = {
   property: Property
 }
 const PropertyCard: FunctionComponent<Props> = ({ property }) => {
   const [allData, setAllData] = useState<Array<PropertyData> | null>(null);
+  const [favorite, setFavorite] = useState<string>("");
+
+  const token = localStorage.token;
+  const UserInfo: any = token ? jwt_decode(token) : "";
 
   useEffect(() => {
-    PropertyService.getAllData(property.idProperty).then(
-      (data) => setAllData(data)
-    );
-  }, [property.idProperty]);
+    PropertyService.getAllData(property.idProperty).then((data) => setAllData(data));
+    FavoriteService.getFavorite(token, UserInfo.idUser, property.idProperty).then(data => setFavorite(data ? "♥" : "○"));
+  }, [UserInfo.idUser, property.idProperty, token]);
 
   const getTags = () => {
     const tags = allData?.filter((data) => data.valuePropertyData === "true")
@@ -32,7 +38,16 @@ const PropertyCard: FunctionComponent<Props> = ({ property }) => {
       </div >
     )
   }
-  
+
+  const toggleFavorite = () => {
+    if (!token) {
+      alert('Vous devez être connecté.e pour avoir accés aux favoris');
+      return;
+    }
+    FavoriteService.toggleFavorite(token, UserInfo.idUser, property.idProperty);
+    setFavorite(favorite === "♥" ? "○" : "♥");
+  }
+
   return (
     <div id="containerPropertyCard" className="card d-flex flex-row border p-0 w-auto" style={{ height: "200px" }}>
       {
@@ -67,6 +82,7 @@ const PropertyCard: FunctionComponent<Props> = ({ property }) => {
           {getTags()}
         </div>
         <div id="container-button" className="d-flex justify-content-end">
+          <FavBtn toggleFavorite={() => toggleFavorite()} favorite={favorite} />
           <Btn texte="Voir le bien" push={"/property/" + property.idProperty} />
         </div>
       </div>
