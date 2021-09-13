@@ -3,7 +3,6 @@ import '../../assets/css/login.css';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { FunctionComponent } from 'react';
-import jwt_decode from "jwt-decode";
 
 
 type Props = {
@@ -28,10 +27,6 @@ const Login: FunctionComponent<Props> = ({ updateToken }) => {
 
                     localStorage.token = data.data.token;
                     updateToken(data.data.token);
-
-                    let token = data.data.token;
-                    let UserInfo: any = jwt_decode(token);
-
                     history.push("/");
                 }
                 if (data.data.message === "Unauthorized") {
@@ -54,8 +49,10 @@ const Login: FunctionComponent<Props> = ({ updateToken }) => {
                     </div>
                     <button type="submit" className="center buttonForm">Connexion</button>
                 </form>
-                <a href="/" className="mt-4 text-decoration-underline">Mot de passe oublié ?  </a>
-                <a href="/register" className="mt-2 text-decoration-underline" >S'inscrire</a>
+                <div className="mt-3">
+                    <a href=""> S'inscrire</a> <br />
+                    <a href="">  Mot de passe oubliée</a>
+                </div>
             </div >
         </div >
     )

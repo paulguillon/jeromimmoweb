@@ -1,5 +1,5 @@
-import React, { FunctionComponent, useState } from "react";
-import "../../assets/css/property-card.css";
+import { FunctionComponent, useState } from "react";
+import "../../assets/css/property.css";
 import PropertyService from "../../services/property-service";
 
 type Params = { updateFilters: Function };
@@ -11,7 +11,7 @@ type Filters = {
   tags: Array<string>,
 }
 
-const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }) => {
+const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }, props) => {
   const [state, setState] = useState<Filters>({
     type: "",
     min: 0,
@@ -40,67 +40,81 @@ const PropertyFilter: FunctionComponent<Params> = ({ updateFilters }) => {
 
   const getTags = () => {
     return (
-      <label>
-        Filtre
-        <select className="browser-default custom-select" multiple onChange={setTags}>
-          {PropertyService.getTags().map((tag, index) => (<option key={index} value={tag}>{tag}</option>))}
-        </select>
-      </label>
+      <select className="browser-default custom-select" multiple onChange={setTags}>
+        {PropertyService.getTags().map((tag, index) => (<option key={index} value={tag}>{tag}</option>))}
+      </select>
+
+
+
+
     );
   }
 
   return (
-    <div className="p-5" style={{ backgroundColor: "lightgrey" }}>
-      <h1>Filtres</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="d-flex flex-row align-items-center justify-content-around"
-      >
-        <label>
-          Type de bien
-          <select className="browser-default custom-select" onChange={setType}>
-            <option value="">
-              Tous
-            </option>
-            <option value="Appartement">Appartement</option>
-            <option value="Maison">Maison</option>
-            <option value="Terrain">Terrain</option>
-            <option value="Garage">Garage</option>
-          </select>
-        </label>
-        <fieldset>
-          <legend>Prix</legend>
-          <label>
-            Min
-            <input
-              className="multi-range"
-              type="range"
-              min="0"
-              max="999999"
-              onChange={setMin}
-            />
-            <span style={{ width: "100%", display: "block" }}>{state.min}</span>
-          </label>
-          <label>
-            Max
-            <input
-              className="multi-range"
-              type="range"
-              min="0"
-              max="999999"
-              onChange={setMax}
-            />
-            <span style={{ width: "100%", display: "block" }}>{state.max}</span>
-          </label>
-        </fieldset>
-        <label>
-          Code postal
-          <input type="text" min="0" max="999999" onChange={setZipCode} />
-        </label>
-        {getTags()}
-        <button type="submit" className="btn btn-info">
-          Rechercher
-        </button>
+    <div className="globalContainerFilters p-5">
+
+      <div className="m-auto text-center mb-4">
+        <h2>Filtrez votre recherche selon vos envies</h2>
+      </div>
+
+      <form onSubmit={handleSubmit} >
+        <div className="flex-wrap w-75 m-auto d-flex flex-row align-items-center justify-content-center mb-4">
+          <div className="containerFilter">
+            <span> Type de bien   </span>
+            <select className=" bg-white browser-default custom-select" onChange={setType}>
+              <option value="">
+                Tous
+              </option>
+              <option value="Appartement">Appartement</option>
+              <option value="Maison">Maison</option>
+              <option value="Terrain">Terrain</option>
+              <option value="Garage">Garage</option>
+            </select>
+          </div>
+
+
+          <fieldset className="d-flex">
+            <div className="containerFilter">
+              <span> Min  </span>
+              <input
+                className="multi-range bg-white"
+                type="text"
+                min="0"
+                max="999999"
+                onChange={setMin}
+              />
+            </div>
+            <div className="containerFilter">
+              <span> Max   </span>
+              <input
+                className="multi-range  bg-white"
+                type="text"
+                min="0"
+                max="999999"
+                onChange={setMax}
+              />
+            </div>
+          </fieldset>
+
+          <div className="containerFilter">
+            <span>Code postal   </span>
+            <input className="bg-white" type="text" min="0" max="999999" onChange={setZipCode} />
+          </div>
+          <div className="containerFilter   ">
+            <span>Filtres</span>
+            {getTags()}
+          </div>
+
+        </div>
+
+
+        <div className="m-auto d-flex justify-content-center">
+          <button type="submit" className="searchBtn">
+            Rechercher
+          </button>
+
+
+        </div>
       </form>
     </div>
   );

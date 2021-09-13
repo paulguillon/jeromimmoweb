@@ -1,10 +1,11 @@
 import { FunctionComponent } from "react";
+import "../../assets/css/general.css";
 
 const Contact: FunctionComponent = () => {
     return (
         <div>
 
-            <header className="bg-black p-5 text-center text-white">
+            <header className="p-5 mb-5 ">
                 <h2>Formulaire de contact</h2>
             </header>
 

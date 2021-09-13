@@ -3,6 +3,8 @@ import logo from '../../assets/img/logo.svg';
 import '../../assets/css/nav.css';
 import { FunctionComponent } from 'react';
 
+import favorisTrue from '../../assets/img/favorisTrue.svg'
+
 type Props = {
   token: string | null
 }
@@ -30,7 +32,7 @@ const HeaderNavigation: FunctionComponent<Props> = ({ token }) => {
           <ul className="navbar-nav me-auto">
             <li><Link to="/">Accueil</Link></li>
             <li><Link to="/properties">Immobilier</Link></li>
-            <li><Link to="/agencies">Agences</Link></li>
+            <li><Link to="/agencies">Nos agences</Link></li>
             <li><Link to="/faq">Faq</Link></li>
             <li><Link to="/contact">Contact</Link></li>
 
@@ -38,13 +40,16 @@ const HeaderNavigation: FunctionComponent<Props> = ({ token }) => {
 
           {token ? (
             < ul className="navbar-nav d-flex justify-content-lg-end align-content-end">
-              <li><Link to="/favoris">Mes favoris</Link></li>
+              <li className="d-flex align-items-center">
+                <Link to="/favoris" className="d-inline-flex">
+                  <img src={favorisTrue} alt="Favoris Icone" width="20px" className="me-2" />
+                  <span className="d-block">Mes favoris</span>
+                </Link></li>
               <li><Link to="/profile">Profil</Link></li>
               <li><Link to="/logout">Déconnexion </Link></li>
             </ ul>
           ) : (
             <ul className="navbar-nav d-flex justify-content-lg-end align-content-end">
-              <li><Link to="/favoris">Mes favoris</Link></li>
               <li><Link to="/register">S'inscrire</Link></li>
               <li><Link to="/login" >Connexion</Link></li>
             </ul>

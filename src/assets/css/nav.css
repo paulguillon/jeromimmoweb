@@ -5,12 +5,11 @@
 nav {
     height: inherit!important;
     background-color: white;
-    box-shadow: 0px 5px 15px rgb(0 0 0 / 20%)!important;
-
+    box-shadow: 0px 5px 15px rgb(0 0 0 / 15%)!important;
 }
 
 nav ul li a {
-    color: #68b0ab;
+    color: #495464;
     font-weight: 500;
 }
 

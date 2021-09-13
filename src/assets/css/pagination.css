@@ -1,0 +1,12 @@
+nav button {
+    color: white!important;
+    background-color: #495464!important;
+}
+
+.activePage {
+    background-color: #68b0ab!important;
+}
+
+.notActivePage {
+    border: none;
+}

@@ -18,12 +18,15 @@ import NotFound from "./pages/page-not-found";
 import Contact from "./pages/contact/contact";
 
 import jwt_decode from "jwt-decode";
+import favorites from "./pages/favorite/favorite";
+import Faq from "./pages/faq/faq";
+
 
 const App: FunctionComponent = () => {
   const history = useHistory();
 
   if (!localStorage.token)
-    history.push('/login');
+    history.push('/logout');
 
   const [token, setToken] = useState<string>(localStorage.token)
 
@@ -59,8 +62,8 @@ const App: FunctionComponent = () => {
         <Route exact path="/condition-general" />
         <Route exact path="/mentions-legales" />
         <Route exact path="/contact" component={Contact} />
-        <Route exact path="/faq" />
-        <Route exact path="/favoris" />
+        <Route exact path="/faq" component={Faq} />
+        <Route exact path="/favoris" component={favorites} />
 
         <Route exact path="/properties" component={Properties} />
         <Route path="/property/:idProperty" component={PropertyDetail} />

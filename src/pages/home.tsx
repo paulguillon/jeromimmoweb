@@ -23,12 +23,14 @@ const Home: FunctionComponent = () => {
       (properties) => setTerrains(properties)
     );
   }, []);
-  
+
   return (
     <div>
-      <header className="text-center p-5 bg-black text-white">
-        <h1>Nouveautés</h1>
+      <header className="text-center p-5 mb-5">
+        <h1>Bienvenue chez Jeromimmo </h1>
       </header>
+
+
       <div className="container">
         <PropertyList
           key="Appartements"

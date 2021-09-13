@@ -38,3 +38,23 @@ body, html {
   min-width: 100%;
   max-width: 100%;
 }
+
+header {
+  background-color: #68b0ab!important;
+  color: white!important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  min-height: 200px;
+}
+
+.generalBtn {
+  background-color: #495464;
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 20px;
+  box-shadow: 0px 5px 5px rgb(0 0 0 / 10%)!important;
+}

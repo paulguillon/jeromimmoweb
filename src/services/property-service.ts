@@ -37,7 +37,9 @@ export default class PropertyService {
       )
       .then((response) => response.data)
       .then((data) => data);
+
   }
+
 
   static async getAllData(idProperty: number): Promise<Array<PropertyData>> {
     const promise = await axios(`https://jeromimmo.fr/api/v1/properties/${idProperty}/data`);

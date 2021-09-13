@@ -4,7 +4,6 @@ import Agency from "../../models/agency/agency";
 import AgencyCardDetail from "../../components/agency/agency-card-detail";
 import AgencyService from "../../services/agency-service";
 import Loader from "../../components/loader";
-import Btn from "../../components/btn";
 
 type Params = { idAgency: string };
 

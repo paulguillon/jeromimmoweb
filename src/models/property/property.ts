@@ -7,6 +7,7 @@ export default class Property {
   created_by: number;
   updated_by: number;
 
+
   constructor(
     idProperty: number,
     typeProperty: string = 'type',

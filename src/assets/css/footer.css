@@ -13,21 +13,20 @@ footer {
 #nav-footer {
     width: 100%;
     display: flex;
-}
-
-#navList-footer {
-    display: flex;
-    justify-content: left;
-    text-align: left;
     flex-direction: column;
+    justify-content: center;
 }
 
-#logo-footer {
-    width: 30%;
+#nav-footer ul {
     display: flex;
-    align-items: center;
     justify-content: center;
-    border-left: solid 2px white;
+    flex-direction: row;
+    margin: 5px 0px;
+}
+
+#nav-footer ul li {
+    margin: 0px 10px;
+    font-weight: 500;
 }
 
 #copyright-footer {

@@ -42,7 +42,7 @@ const Register = () => {
                     </div>
                     <div>
                         <input type="password" name="passwordUser" placeholder="Mot de passe" onChange={e => setPassword(e.target.value)} />
-                        <input type="password" name="passwordUser_confirmation" placeholder="Mot de passe" onChange={e => setPasswordUser_confirmation(e.target.value)} />
+                        <input type="password" name="passwordUser_confirmation" placeholder="Vérification mot de passe " onChange={e => setPasswordUser_confirmation(e.target.value)} />
 
                     </div>
                     <button type="submit" className="center buttonForm">S'inscrire</button>

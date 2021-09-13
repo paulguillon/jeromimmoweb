@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
+import { FunctionComponent, useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import Property from "../../models/property/property";
 import PropertyCardDetail from "../../components/property/property-card-detail";

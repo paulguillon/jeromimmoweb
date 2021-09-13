@@ -1,0 +1,36 @@
+.containerCardImg {
+    height: 150px;
+}
+
+.cardImg {
+    object-fit: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+}
+
+.positionFavoris {
+    top: 0;
+    right: 0;
+    position: absolute;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.positionFavoris .containerFavoris {
+    background-color: whitesmoke;
+    box-shadow: 0px 0px 10px 2px rgb(0 0 0 / 20%);
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: ease-in-out 0.3ss;
+}
+
+.positionFavoris .containerFavoris .imgFavoris {
+    width: 25px;
+    height: 25px;
+}

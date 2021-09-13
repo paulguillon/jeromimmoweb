@@ -7,10 +7,7 @@ import UserService from '../../services/user-service';
 import Visits from '../../models/visit/visits';
 import VisitService from '../../services/visit-service';
 import jwt_decode from "jwt-decode";
-import VisitDetail from '../visit/visit-detail';
 import Loader from '../loader';
-import FavoriteService from '../../services/favorite-service';
-import Favorite from '../../models/favorite/favorite';
 
 const Profile: FunctionComponent = () => {
 
@@ -28,7 +25,6 @@ const Profile: FunctionComponent = () => {
   });
 
   const [visits, setVisits] = useState<Visits>({ total: 0, visits: [] });
-  const [favorites, setFavorites] = useState<Favorite[]>([]);
 
   const token: string = localStorage.token;
   const UserInfo: any = jwt_decode(token);
@@ -36,7 +32,6 @@ const Profile: FunctionComponent = () => {
   useEffect(() => {
     UserService.getUser(token, UserInfo.idUser).then(data => setState(data))
     VisitService.getVisits(token, UserInfo.idUser).then(visits => setVisits(visits))
-    FavoriteService.getFavorites(token, UserInfo.idUser).then(data => setFavorites(data))
   }, [UserInfo.idUser, token])
 
   const handleChange = (e: any) => {
@@ -45,7 +40,6 @@ const Profile: FunctionComponent = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-
     e.target.forEach((input: HTMLInputElement) => {
       setState({ ...state, [input.name]: input.value })
     });
@@ -54,64 +48,89 @@ const Profile: FunctionComponent = () => {
   };
 
   return (
-    <div className="m-auto w-75 container-form">
-      <div className="w-100 d-flex flex-column justify-content-start ">
-        <h1>Profil</h1>
-        <form action="" onChange={handleChange} onSubmit={handleSubmit}>
-          <h2>Mes informations</h2>
-          <div className="w-25">
-            <label>Nom
-              <input type="text" name="lastnameUser" defaultValue={state.lastnameUser} />
-            </label>
-            <label>Prénom
-              <input type="text" name="firstnameUser" defaultValue={state.firstnameUser} />
-            </label>
-            <label>Mail
-              <input type="email" name="emailUser" defaultValue={state.emailUser} />
-            </label>
-            <button type="submit" className="center buttonForm">Modifier</button>
-          </div>
-        </form>
-        <details>
-          <summary>Mes rendez-vous</summary>
-          {visits ? (
-            visits.visits.length > 0 ? (
-              <table>
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Sujet</th>
-                    <th>Agent</th>
-                    <th>Agence</th>
-                    <th>Commentaire</th>
-                    <th>Propiété</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {visits.visits.map(
-                    visit => (
-                      <VisitDetail key={visit.idVisit} visit={visit} token={token} />
-                    ))}
-                </tbody>
-              </table>
-            ) : (
-              <div className="d-flex justify-content-center align-items-center" style={{ height: "400px" }}>
-                <h4 className="center">
-                  Vous n'avez aucun rendez-vous
-                </h4>
+    <div>
+
+      <header className="text-center p-5 mb-5">
+        <h2>Img Banniere profil</h2>
+      </header>
+
+      <div className="d-flex flex-column">
+
+        <div className="m-auto w-75 container-form mb-5">
+          <div className="w-100 d-flex flex-column justify-content-start ">
+            <form action="" onChange={handleChange} onSubmit={handleSubmit}>
+              <div id="profilChange" className="d-flex flex-column">
+                <label>Nom
+                  <input type="text" name="lastnameUser" defaultValue={state.lastnameUser} />
+                </label>
+                <label>Prénom
+                  <input type="text" name="firstnameUser" defaultValue={state.firstnameUser} />
+                </label>
+                <label>Mail
+                  <input type="email" name="emailUser" defaultValue={state.emailUser} />
+                </label>
+                <div className="d-flex justify-content-end">
+                  <button type="submit" className="center buttonForm w-25">Mettre à jour </button>
+                </div>
               </div>
-            )
-          ) : (
-            <Loader />
-          )}
-        </details>
-        <details>
-          <summary>Mes favoris</summary>
-          {favorites.map((favorite) => (
-            <span>{favorite.idProperty}</span>
-          ))}
-        </details>
+            </form>
+
+            <div id="passwordChange" className="d-flex flex-column">
+              <form action="" onChange={handleChange} onSubmit={handleSubmit}>
+                <div id="profilChange" className="d-flex flex-column">
+                  <label>Mot de passe
+                    <input type="text" name="password" />
+                  </label>
+                  <label>Confirmation nouveau mot de passe
+                    <input type="text" name="confirmPassword" />
+                  </label>
+                  <div className="d-flex justify-content-end">
+                    <button type="submit" className="center buttonForm w-25">Mettre à jour </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div className="m-auto w-75 container-form  mb-5">
+          {
+
+            visits ? (
+              visits.visits.length > 0 ? (
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Sujet</th>
+                      <th>Agent</th>
+                      <th>Agence</th>
+                      <th>Commentaire</th>
+                      <th>Propiété</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* {visits.visits.map(
+                      visit => (
+                        <VisitDetail key={visit.idVisit} visit={visit} token={token} />
+                      ))} */}
+                  </tbody>
+                </table>
+              ) : (
+                <div className="d-flex justify-content-center align-items-center" style={{ height: "400px" }}>
+                  <h4 className="center">
+                    Vous n'avez aucun rendez-vous
+                  </h4>
+                </div>
+              )
+            ) : (
+              <Loader />
+            )}
+
+        </div>
       </div>
+
+
     </div>
   )
 }

@@ -1,27 +1,36 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../assets/css/footer.css';
-import logoBlanc from '../../assets/img/logoblanc.svg';
+
 function FooterNavigation() {
     return (
         <footer>
             <div id="container-footer">
                 <div id="nav-footer">
-                    <ul id="navList-footer" className="d-flex  justify-content-between">
-                        <li><Link to="/" className="text-white">Accueil</Link></li>
-                        <li><Link to="/mentions-legales" className="text-white">Mentions Légales</Link></li>
-                        <li><Link to="/condition-general" className="text-white">CGU/CGV</Link> </li>
-                        <li><Link to="/contact" className="text-white">Contact</Link> </li>
-                        <li><Link to="/faq" className="text-white">Faq</Link> </li>
-
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Instagram</li>
+                        <li>Twitter</li>
                     </ul>
-                </div>
-                <div id="logo-footer">
-                    <img src={logoBlanc} alt="LogoBlancFooter" width="200px" />
+                    <ul>
+                        <li><Link to="/" className="text-white">Accueil</Link></li>
+                        -
+                        <li><Link to="/faq" className="text-white">Immobilier</Link> </li>
+                        -
+                        <li><Link to="/agencies" className="text-white">Nos Agences</Link> </li>
+                        -
+                        <li><Link to="/contact" className="text-white">Contact</Link> </li>
+                        -
+                        <li><Link to="/faq" className="text-white">Faq</Link> </li>
+                    </ul>
+                    <ul>
+                        <li><Link to="/mentions-legales" className="text-white">mentions Légales</Link></li>
+                        -
+                        <li><Link to="/condition-general" className="text-white">CGU/CGV</Link> </li>
+                    </ul>
                 </div>
             </div >
             <div id="copyright-footer" className="w-auto d-flex justify-content-center align-items-center">
-                <span>© 2020 - 2021 / Jeromimmo</span>
+                <span>Tous droits réservés © 2020 - 2021</span>
             </div>
         </footer >
     );
