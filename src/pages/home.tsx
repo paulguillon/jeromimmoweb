@@ -32,11 +32,7 @@ const Home: FunctionComponent = () => {
 
 
       <div className="container">
-        <PropertyList
-          key="Appartements"
-          title="Appartements"
-          data={appartements}
-        />
+        <PropertyList key="Appartements" title="Appartements" data={appartements} />
         <PropertyList key="Maisons" title="Maisons" data={maisons} />
         <PropertyList key="Terrains" title="Terrains" data={terrains} />
         <PropertyList key="Garages" title="Garages" data={garages} />

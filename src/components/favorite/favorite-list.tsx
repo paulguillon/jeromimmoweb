@@ -12,7 +12,6 @@ import FavoriteCard from './favorite-card';
 
 const FavoriteList: FunctionComponent = () => {
 
-
     const [favorites, setFavorites] = useState<Favorite[]>([]);
     const [property, setProperties] = useState<Property>();
 
@@ -27,9 +26,9 @@ const FavoriteList: FunctionComponent = () => {
     }, [UserInfo.idUser, token])
 
     return (
-        <div>
-            <div className="m-auto w-50 mt-5  mb-5 container-form flex-column">
-                <div>
+        <div className="container p-5 m-auto">
+            <div className="m-auto mt-5 mb-5  ">
+                <div className="d-flex flex-wrap">
                     {favorites.map((favoris) => (
                         <FavoriteCard key={favoris.idProperty} idProperty={favoris.idProperty} />
                     ))}

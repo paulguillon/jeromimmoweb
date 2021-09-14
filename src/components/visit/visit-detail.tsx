@@ -40,7 +40,7 @@ const VisitDetail: FunctionComponent<Props> = ({ visit, token }) => {
 
     VisitService.getData(visit.idVisit, "titre", token).then(data => setTitre(data?.valueVisitData));
     VisitService.getData(visit.idVisit, "comment", token).then(data => setComment(data?.valueVisitData));
-    
+
   }, [visit.idVisit, token, listId?.idProperty, listId?.idAgent, listId?.idAgence]);
 
   return (
@@ -49,8 +49,9 @@ const VisitDetail: FunctionComponent<Props> = ({ visit, token }) => {
       <td>{titre}</td>
       <td>{nomAgent}</td>
       <td>{nomAgence}</td>
-      <td>{comment ?? "Aucun"}</td>
-      <td><img src={propertyPic} alt="bien" onClick={() => history.push('/property/' + listId?.idProperty)} /></td>
+      <td>{comment ?? ("Aucun")
+      }</td>
+      {/* <td><img src={propertyPic} alt="bien" onClick={() => history.push('/property/' + listId?.idProperty)} /></td> */}
     </tr>
   );
 

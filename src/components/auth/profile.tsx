@@ -8,6 +8,7 @@ import Visits from '../../models/visit/visits';
 import VisitService from '../../services/visit-service';
 import jwt_decode from "jwt-decode";
 import Loader from '../loader';
+import VisitDetail from '../visit/visit-detail';
 
 const Profile: FunctionComponent = () => {
 
@@ -106,14 +107,14 @@ const Profile: FunctionComponent = () => {
                       <th>Agent</th>
                       <th>Agence</th>
                       <th>Commentaire</th>
-                      <th>Propiété</th>
+                      <th>Propriété</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {visits.visits.map(
+                    {visits.visits.map(
                       visit => (
                         <VisitDetail key={visit.idVisit} visit={visit} token={token} />
-                      ))} */}
+                      ))}
                   </tbody>
                 </table>
               ) : (

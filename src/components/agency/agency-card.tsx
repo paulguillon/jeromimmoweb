@@ -21,12 +21,14 @@ const AgencyCard: FunctionComponent<Props> = ({ agency }) => {
         <img src={image} alt="agencyImage" className="thumbnailCard" />
       </div>
       <div className="card-body">
-        <h4>{agency.nameAgency}</h4>
+        <h4>Agence : {agency.nameAgency}</h4>
 
         <p className="card-text">
           Adresse :  {agency.cityAgency},  {agency.zipCodeAgency}
         </p>
-        <Btn texte="Voir les détails" push={"/agency/" + agency.idAgency} />
+        <div className="d-flex justify-content-end">
+          <Btn texte="+ d'infos" push={"/agency/" + agency.idAgency} />
+        </div>
       </div>
     </div>
   );

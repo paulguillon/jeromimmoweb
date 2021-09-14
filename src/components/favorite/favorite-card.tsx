@@ -41,28 +41,28 @@ const FavoriteCard: FunctionComponent<Props> = ({ idProperty }) => {
     }, [idProperty])
 
     return (
-        <div className="m-auto bg-white mb-4 shadow-1 d-flex">
-
-            <div className="w-25 containerCardImg">
+        <div id="containerFavoriteCard" className="m-auto bg-white mb-4 shadow-1">
+            <div className="w-100 containerThumbnailCard position-relative">
                 {allData && (
                     allData?.map(data => (
                         data.keyPropertyData === 'thumbnail' && (
-                            <img key={data.idPropertyData} src={data.valuePropertyData} alt="propertyImage" className="cardImg" />
+                            <img key={data.idPropertyData} src={data.valuePropertyData} alt="propertyImage" className="thumbnailCard" />
                         )
                     ))
                 )}
+                <div>
+                    <FavBtn toggleFavorite={() => toggleFavorite()} favorite={favorite} />
+                </div>
             </div>
 
-            <div className="w-75 containerCardInformation">
+            <div className="containerCardInformation card-body d-flex justify-content-around flex-column position-relative">
                 <h4>{properties?.typeProperty} <br /></h4>
                 <h4>{properties?.cityProperty} <br /></h4>
                 <h4>{properties?.zipCodeProperty} <br /></h4>
                 <div id="container-button" className="d-flex justify-content-end">
-                    <Btn texte="Accéder au bien" push={"/property/" + idProperty} />
+                    <Btn texte="Voir le bien" push={"/property/" + idProperty} />
                 </div>
-                {/* <div className="position-relative">
-                    < FavBtn toggleFavorite={() => toggleFavorite()} favorite={favorite} />
-                </div> */}
+
             </div>
 
 
