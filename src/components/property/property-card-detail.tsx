@@ -2,12 +2,15 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import Property from "../../models/property/property";
 
-import Btn from "../../components/btn";
 import PropertyMap from "../../components/property/property-map";
+import jwt_decode from "jwt-decode";
 
 import { FacebookIcon, FacebookShareButton, TwitterIcon, TwitterShareButton } from "react-share";
 import PropertyData from "../../models/property/propertyData";
 import PropertyService from "../../services/property-service";
+import ImgNotFound from "../../assets/img/imgNotFound.jpg";
+import FavoriteService from "../../services/favorite-service";
+import FavBtn from "../favorite/favorite-btn";
 
 
 
@@ -16,14 +19,31 @@ type Props = {
 };
 
 const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
+
   const [allData, setAllData] = useState<Array<PropertyData> | null>(null);
-  const [oneData, setData] = useState<Array<PropertyData> | null>(null);
+  const [Data, setData] = useState<PropertyData>();
+  const [favorite, setFavorite] = useState<string>("");
+
+  const token = localStorage.token;
+  const UserInfo: any = token ? jwt_decode(token) : "";
 
   useEffect(() => {
     PropertyService.getAllData(property.idProperty).then(
       (data) => setAllData(data)
     );
+    PropertyService.getData(property.idProperty, "thumbnail").then((data) => setData(data));
+
+    if (token) {
+      FavoriteService.getFavorite(token, UserInfo.idUser, property.idProperty).then(data => setFavorite(data ? "true" : "false"));
+    }
   }, [property.idProperty]);
+
+  const toggleFavorite = () => {
+    if (token) {
+      FavoriteService.toggleFavorite(token, UserInfo.idUser, property.idProperty);
+      setFavorite(favorite === "true" ? "false" : "true");
+    }
+  }
 
   const getTags = () => {
     const tags = allData?.filter((data) => data.valuePropertyData === "true")
@@ -42,14 +62,24 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
         <div id="PropertyInformations" className="w-75 m-2 bg-white">
           <div className="d-flex">
             <div className="w-50">
-              {allData && (
-                allData?.map(data => (
-                  data.keyPropertyData === 'thumbnail' && (
-                    <img key={data.idPropertyData} src={data.valuePropertyData} alt="propertyImage" className="img-fluid" width="100%" />
-                  )
-                )))}
+              {Data ? (
+                <img
+                  key={Data.idPropertyData}
+                  src={Data.valuePropertyData}
+
+                  alt="propertyImage" className="img-fluid" width="100%"
+                />
+              ) : (
+                <img
+                  src={ImgNotFound}
+                  alt="image_bien"
+                  className="img-fluid" width="100%"
+                />
+              )
+              }
+
             </div>
-            <div className="w-50 d-flex align-items-center justify-content-center flex-column position-relative ">
+            <div className="w-50 d-flex align-items-center justify-content-center flex-column position-relative">
               <h3 className="font-weight-bold" >
                 {new Intl.NumberFormat("fr-FR", {
                   style: "currency",
@@ -58,6 +88,10 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
               </h3>
               <h4 >{property.typeProperty}</h4>
               <p> {`${property.cityProperty}, ${property.zipCodeProperty}`}</p>
+              {
+                token &&
+                <FavBtn toggleFavorite={() => toggleFavorite()} favorite={favorite} />
+              }
             </div>
           </div>
 
@@ -69,7 +103,7 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
                   <p>
                     {data.valuePropertyData}
                   </p>
-                )  
+                )
               ))}
             <h4>Informations supplémentaires : </h4>
             <ul>

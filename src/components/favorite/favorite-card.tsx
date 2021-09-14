@@ -11,6 +11,7 @@ import jwt_decode from "jwt-decode";
 import "../../assets/css/favoris.css";
 import FavoriteService from '../../services/favorite-service';
 import FavBtn from './favorite-btn';
+import ImgNotFound from "../../assets/img/imgNotFound.jpg";
 
 type Props = {
     idProperty: number
@@ -21,6 +22,7 @@ const FavoriteCard: FunctionComponent<Props> = ({ idProperty }) => {
     const [properties, setProperties] = useState<Property>();
     const [allData, setAllData] = useState<Array<PropertyData> | null>(null);
     const [favorite, setFavorite] = useState<string>("");
+    const [Data, setData] = useState<PropertyData>();
 
     const token = localStorage.token;
     const UserInfo: any = token ? jwt_decode(token) : "";
@@ -35,6 +37,8 @@ const FavoriteCard: FunctionComponent<Props> = ({ idProperty }) => {
     useEffect(() => {
         PropertyService.getProperty(idProperty).then(data => setProperties(data));
         PropertyService.getAllData(idProperty).then((data) => setAllData(data));
+        PropertyService.getData(idProperty, "thumbnail").then((data) => setData(data));
+
         if (token) {
             FavoriteService.getFavorite(token, UserInfo.idUser, idProperty).then(data => setFavorite(data ? "true" : "false"));
         }
@@ -42,17 +46,26 @@ const FavoriteCard: FunctionComponent<Props> = ({ idProperty }) => {
 
     return (
         <div id="containerFavoriteCard" className="m-auto bg-white mb-4 shadow-1">
-            <div className="w-100 containerThumbnailCard position-relative">
-                {allData && (
-                    allData?.map(data => (
-                        data.keyPropertyData === 'thumbnail' && (
-                            <img key={data.idPropertyData} src={data.valuePropertyData} alt="propertyImage" className="thumbnailCard" />
-                        )
-                    ))
-                )}
-                <div>
+            <div className="containerThumbnailCard position-relative">
+                {Data ? (
+                    <img
+                        key={Data.idPropertyData}
+                        src={Data.valuePropertyData}
+                        alt="image_bien"
+                        className="thumbnailCard"
+                    />
+                ) : (
+                    <img
+                        src={ImgNotFound}
+                        alt="image_bien"
+                        className="thumbnailCard"
+                    />
+                )
+                }
+                {
+                    token &&
                     <FavBtn toggleFavorite={() => toggleFavorite()} favorite={favorite} />
-                </div>
+                }
             </div>
 
             <div className="containerCardInformation card-body d-flex justify-content-around flex-column position-relative">
