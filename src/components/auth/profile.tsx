@@ -4,19 +4,36 @@ import { useEffect, useState } from 'react';
 import { FunctionComponent } from 'react';
 import User from '../../models/user/user';
 import UserService from '../../services/user-service';
-import Visits from '../../models/visit/visits';
-import VisitService from '../../services/visit-service';
+
+// import Visits from '../../models/visit/visits';
+// import VisitService from '../../services/visit-service';
+// import VisitDetail from '../visit/visit-detail';
+
 import jwt_decode from "jwt-decode";
 import Loader from '../loader';
-import VisitDetail from '../visit/visit-detail';
+
+
 
 const Profile: FunctionComponent = () => {
 
-  const [state, setState] = useState<User>({
-    idUser: 0,
+
+  const token: string = localStorage.token;
+  const UserInfo: any = jwt_decode(token);
+
+  useEffect(() => {
+    UserService.getUser(token, UserInfo.idUser).then(data => setUser(data))
+    // VisitService.getVisits(token, UserInfo.idUser).then(visits => setVisits(visits))
+  }, [UserInfo.idUser, token])
+
+  // const [visits, setVisits] = useState<Visits>({ total: 0, visits: [] });
+
+  const [user, setUser] = useState<User>({
+    idUser: UserInfo.idUser,
     lastnameUser: '',
     firstnameUser: '',
     emailUser: '',
+    passwordUser: '',
+    passwordUser_confirmation: '',
     created_at: '',
     created_by: 0,
     updated_at: '',
@@ -25,78 +42,94 @@ const Profile: FunctionComponent = () => {
     data: []
   });
 
-  const [visits, setVisits] = useState<Visits>({ total: 0, visits: [] });
-
-  const token: string = localStorage.token;
-  const UserInfo: any = jwt_decode(token);
-
-  useEffect(() => {
-    UserService.getUser(token, UserInfo.idUser).then(data => setState(data))
-    VisitService.getVisits(token, UserInfo.idUser).then(visits => setVisits(visits))
-  }, [UserInfo.idUser, token])
-
   const handleChange = (e: any) => {
-    setState({ ...state, [e.target.name]: e.target.value })
+    setUser({ ...user, [e.target.name]: e.target.value })
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     e.target.forEach((input: HTMLInputElement) => {
-      setState({ ...state, [input.name]: input.value })
+      setUser({ ...user, [input.name]: input.value })
     });
+    UserService.updateUser(token, user).then(resp => setUser(resp));
 
-    UserService.updateUser(token, state).then(resp => setState(resp));
   };
+
+  const handleChangePassword = (e: any) => {
+    setUser({ ...user, [e.target.name]: e.target.value })
+  };
+
+  const handleSubmitPassword = (e: any) => {
+    e.preventDefault();
+    e.target.forEach((input: HTMLInputElement) => {
+      setUser({ ...user, [input.name]: input.value })
+    });
+    UserService.updateUser(token, user).then(resp => setUser(resp));
+  };
+
 
   return (
     <div>
-
       <header className="text-center p-5 mb-5">
-        <h2>Img Banniere profil</h2>
+        <h2>Votre Profil</h2>
       </header>
 
       <div className="d-flex flex-column">
-
-        <div className="m-auto w-75 container-form mb-5">
-          <div className="w-100 d-flex flex-column justify-content-start ">
-            <form action="" onChange={handleChange} onSubmit={handleSubmit}>
-              <div id="profilChange" className="d-flex flex-column">
-                <label>Nom
-                  <input type="text" name="lastnameUser" defaultValue={state.lastnameUser} />
-                </label>
-                <label>Prénom
-                  <input type="text" name="firstnameUser" defaultValue={state.firstnameUser} />
-                </label>
-                <label>Mail
-                  <input type="email" name="emailUser" defaultValue={state.emailUser} />
-                </label>
-                <div className="d-flex justify-content-end">
-                  <button type="submit" className="center buttonForm w-25">Mettre à jour </button>
-                </div>
-              </div>
-            </form>
-
-            <div id="passwordChange" className="d-flex flex-column">
+        <div className="w-50 mb-5 m-auto">
+          <div className="w-100 d-flex flex-column justify-content-start  container-form ">
+            {user ? (
               <form action="" onChange={handleChange} onSubmit={handleSubmit}>
                 <div id="profilChange" className="d-flex flex-column">
-                  <label>Mot de passe
-                    <input type="text" name="password" />
+                  <label>Nom
+                    <input type="text" name="lastnameUser" defaultValue={user.lastnameUser} />
                   </label>
-                  <label>Confirmation nouveau mot de passe
-                    <input type="text" name="confirmPassword" />
+                  <label>Prénom
+                    <input type="text" name="firstnameUser" defaultValue={user.firstnameUser} />
+                  </label>
+                  <label>Mail
+                    <input type="email" name="emailUser" defaultValue={user.emailUser} />
                   </label>
                   <div className="d-flex justify-content-end">
-                    <button type="submit" className="center buttonForm w-25">Mettre à jour </button>
+                    <button type="submit" className="center buttonForm w-25">Modifier</button>
                   </div>
                 </div>
               </form>
-            </div>
+            ) : (
+
+              <Loader />
+
+            )}
+
           </div>
         </div>
 
-        <div className="m-auto w-75 container-form  mb-5">
-          {
+        <div className="w-50 mb-5 m-auto">
+          <div className="w-100 d-flex flex-column justify-content-start container-form">
+            {user ? (
+              <form action="" onChange={handleChangePassword} onSubmit={handleSubmitPassword}>
+                <div className="d-flex flex-column">
+                  <label className="mb-3">
+                    Nouveau mot de passe
+                    <input type="password" name="passwordUser" defaultValue={user.passwordUser} />
+                  </label>
+                  <label> Confirmation nouveau mot de passe
+                    <input type="password" name="passwordUser_confirmation" defaultValue={user.passwordUser_confirmation} />
+                  </label>
+                  <div className="d-flex justify-content-end">
+                    <button type="submit" className="center buttonForm w-25">Modifier</button>
+                  </div>
+                </div>
+              </form>
+            ) : (
 
+              <Loader />
+
+            )}
+          </div>
+        </div>
+        {/* 
+        <div className="m-auto w-50 container-form  mb-5">
+          {
             visits ? (
               visits.visits.length > 0 ? (
                 <table>
@@ -128,7 +161,7 @@ const Profile: FunctionComponent = () => {
               <Loader />
             )}
 
-        </div>
+        </div> */}
       </div>
 
 

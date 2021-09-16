@@ -25,6 +25,8 @@ export default class UserService {
         firstnameUser: user.firstnameUser,
         lastnameUser: user.lastnameUser,
         emailUser: user.emailUser,
+        passwordUser: user.passwordUser,
+        passwordUser_confirmation: user.passwordUser_confirmation
       }
     });
     return await resp.data;
@@ -43,14 +45,14 @@ export default class UserService {
   }
 
   static async getData(idUser: number, key: string, token: string): Promise<UserData> {
-      const promise = await axios({
-        method: 'GET',
-        url: `https://jeromimmo.fr/api/v1/users/${idUser}/data/${key}`,
-        headers: {
-          Authorization: 'Bearer ' + token,
-        }
-      });
-      const result = await promise.data;
-      return result.data;
+    const promise = await axios({
+      method: 'GET',
+      url: `https://jeromimmo.fr/api/v1/users/${idUser}/data/${key}`,
+      headers: {
+        Authorization: 'Bearer ' + token,
+      }
+    });
+    const result = await promise.data;
+    return result.data;
   }
 }
