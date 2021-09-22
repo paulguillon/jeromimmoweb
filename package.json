@@ -1,6 +1,6 @@
 {
   "name": "jeromimmoweb",
-  "homepage": "https://paulguillon.github.io/jeromimmoweb",
+  "homepage": "https://paulguillon.github.io",
   "version": "1.0.0",
   "description": "An awesome application to handle some pokemons.",
   "dependencies": {
