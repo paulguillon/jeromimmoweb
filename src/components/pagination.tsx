@@ -11,7 +11,6 @@ type Props = {
 
 const Pagination: FunctionComponent<Props> = ({ perPage, data, currentPage, paginate }) => {
   const nbPages = Math.ceil((data ? (data.total ? data.total : 1) : 1) / perPage);
-  console.log(data);
   return (
     <nav className="d-flex justify-content-center align-items-center p-4">
       <button type="button" className="btn btn-primary btn-rounded mx-2" disabled={currentPage === 1 ? true : false} onClick={() => paginate(currentPage === 1 ? currentPage : currentPage - 1)}>Précédent</button>

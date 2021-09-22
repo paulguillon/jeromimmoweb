@@ -8,6 +8,7 @@ import Favorite from '../../models/favorite/favorite';
 import PropertyService from '../../services/property-service';
 import Property from '../../models/property/property';
 import FavoriteCard from './favorite-card';
+import PropertyCard from '../property/property-card';
 
 
 const FavoriteList: FunctionComponent = () => {
@@ -24,6 +25,7 @@ const FavoriteList: FunctionComponent = () => {
             PropertyService.getProperty(favoris.idProperty).then(dataProperty => setProperties(dataProperty));
         })
     }, [UserInfo.idUser, token])
+
 
     return (
         <div className="container p-5 m-auto">

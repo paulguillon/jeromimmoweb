@@ -6,11 +6,13 @@ function FooterNavigation() {
         <footer>
             <div id="container-footer">
                 <div id="nav-footer">
+                    
                     <ul>
                         <li>Facebook</li>
                         <li>Instagram</li>
                         <li>Twitter</li>
                     </ul>
+
                     <ul>
                         <li><Link to="/" className="text-white">Accueil</Link></li>
                         -
@@ -22,10 +24,9 @@ function FooterNavigation() {
                         -
                         <li><Link to="/faq" className="text-white">Faq</Link> </li>
                     </ul>
+                    
                     <ul>
-                        <li><Link to="/mentions-legales" className="text-white">mentions Légales</Link></li>
-                        -
-                        <li><Link to="/condition-general" className="text-white">CGU/CGV</Link> </li>
+                        <li><Link to="/mentions-legales" className="text-white">Mentions Légales</Link></li>
                     </ul>
                 </div>
             </div >

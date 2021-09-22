@@ -1,13 +1,14 @@
 import '../../assets/css/login.css';
+import '../../assets/css/profile.css';
 
 import { useEffect, useState } from 'react';
 import { FunctionComponent } from 'react';
 import User from '../../models/user/user';
 import UserService from '../../services/user-service';
 
-// import Visits from '../../models/visit/visits';
-// import VisitService from '../../services/visit-service';
-// import VisitDetail from '../visit/visit-detail';
+import Visits from '../../models/visit/visits';
+import VisitService from '../../services/visit-service';
+import VisitDetail from '../visit/visit-detail';
 
 import jwt_decode from "jwt-decode";
 import Loader from '../loader';
@@ -19,13 +20,14 @@ const Profile: FunctionComponent = () => {
 
   const token: string = localStorage.token;
   const UserInfo: any = jwt_decode(token);
+  console.log(UserInfo);
 
   useEffect(() => {
-    UserService.getUser(token, UserInfo.idUser).then(data => setUser(data))
-    // VisitService.getVisits(token, UserInfo.idUser).then(visits => setVisits(visits))
+    UserService.getUser(token, UserInfo.idUser).then(data => setUser(data)).catch(error => console.log(error))
+    VisitService.getVisits(token, UserInfo.idUser).then(visits => setVisits(visits)).catch(error => console.log(error))
   }, [UserInfo.idUser, token])
 
-  // const [visits, setVisits] = useState<Visits>({ total: 0, visits: [] });
+  const [visits, setVisits] = useState<Visits>({ total: 0, visits: [] });
 
   const [user, setUser] = useState<User>({
     idUser: UserInfo.idUser,
@@ -127,7 +129,7 @@ const Profile: FunctionComponent = () => {
             )}
           </div>
         </div>
-        {/* 
+
         <div className="m-auto w-50 container-form  mb-5">
           {
             visits ? (
@@ -161,7 +163,7 @@ const Profile: FunctionComponent = () => {
               <Loader />
             )}
 
-        </div> */}
+        </div>
       </div>
 
 

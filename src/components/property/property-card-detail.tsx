@@ -21,7 +21,6 @@ type Props = {
 const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
 
   const [allData, setAllData] = useState<Array<PropertyData> | null>(null);
-  const [Data, setData] = useState<PropertyData>();
   const [favorite, setFavorite] = useState<string>("");
 
   const token = localStorage.token;
@@ -31,8 +30,6 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
     PropertyService.getAllData(property.idProperty).then(
       (data) => setAllData(data)
     );
-    PropertyService.getData(property.idProperty, "thumbnail").then((data) => setData(data));
-
     if (token) {
       FavoriteService.getFavorite(token, UserInfo.idUser, property.idProperty).then(data => setFavorite(data ? "true" : "false"));
     }
@@ -50,9 +47,35 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
     return (
       <div className="mt-3">
         {
-          tags?.map((tag) => (<span style={{ backgroundColor: '#495464', padding: ".2rem 1rem", fontSize: "12px", margin: "0rem 0.2rem", borderRadius: "5px " }} className="text-white  d-inline-flex mb-2">{tag.keyPropertyData}</span>))
+          tags?.map((tag) =>
+          (<span style={{ backgroundColor: '#495464', padding: ".2rem 1rem", fontSize: "12px", margin: "0rem 0.2rem", borderRadius: "5px " }} className="text-white  d-inline-flex mb-2">
+            {tag.keyPropertyData}
+          </span>))
         }
       </div >
+    )
+  }
+
+  let propertyData: any = [];
+  {
+    allData && (
+      allData.map(data => (
+        data.keyPropertyData === 'thumbnail' && (
+          propertyData.thumbnail = data.valuePropertyData
+        ),
+        data.keyPropertyData === 'Description' && (
+          propertyData.Description = data.valuePropertyData
+        ),
+        data.keyPropertyData === 'Chambres' && (
+          propertyData.chambres = data.valuePropertyData
+        ),
+        data.keyPropertyData === 'Nombre de pièces' && (
+          propertyData.pièces = data.valuePropertyData
+        ),
+        data.keyPropertyData === 'Surface' && (
+          propertyData.surface = data.valuePropertyData
+        )
+      ))
     )
   }
 
@@ -62,22 +85,8 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
         <div id="PropertyInformations" className="w-75 m-2 bg-white">
           <div className="d-flex">
             <div className="w-50">
-              {Data ? (
-                <img
-                  key={Data.idPropertyData}
-                  src={Data.valuePropertyData}
-
-                  alt="propertyImage" className="img-fluid" width="100%"
-                />
-              ) : (
-                <img
-                  src={ImgNotFound}
-                  alt="image_bien"
-                  className="img-fluid" width="100%"
-                />
-              )
-              }
-
+              <img src={propertyData.thumbnail ? propertyData.thumbnail : ImgNotFound} key={property.idProperty}
+                alt="propertyImage" className="img-fluid" width="100%" />
             </div>
             <div className="w-50 d-flex align-items-center justify-content-center flex-column position-relative">
               <h3 className="font-weight-bold" >
@@ -86,7 +95,7 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
                   currency: "EUR",
                 }).format(Number(property.priceProperty))}
               </h3>
-              <h4 >{property.typeProperty}</h4>
+              <h4> {property.typeProperty}</h4>
               <p> {`${property.cityProperty}, ${property.zipCodeProperty}`}</p>
               {
                 token &&
@@ -97,45 +106,21 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
 
           <div className="informationProperty my-5 mx-2">
             <h3>Détails du bien : </h3>
-            {
-              allData?.map(data => (
-                data.keyPropertyData === 'Description' && (
-                  <p>
-                    {data.valuePropertyData}
-                  </p>
-                )
-              ))}
+            <p>
+              {propertyData.Description ? propertyData.Description : "Aucune description disponible"}
+            </p>
+
             <h4>Informations supplémentaires : </h4>
             <ul>
-              {allData && (
-                allData?.map(data => (
-                  data.keyPropertyData === 'Chambres' && (
-                    <li>
-                      {data.valuePropertyData}
-                    </li>
-                  )
-                )))}
-              {allData && (
-                allData?.map(data => (
-                  data.keyPropertyData === 'Nombre de pièces' && (
-                    <li>
-                      {data.valuePropertyData}
-                    </li>
-                  )
-                )))}
-              {allData && (
-                allData?.map(data => (
-                  data.keyPropertyData === 'Surface' && (
-                    <li>
-                      {data.valuePropertyData}
-                    </li>
-                  )
-                )))}
+              <li> {propertyData.chambres ? propertyData.chambres : "Aucune information sur le nombre de chambre disponible"}</li>
+              <li> {propertyData.pièces ? propertyData.pièces : "Aucune information sur le nombre de pièces disponible"}</li>
+              <li> {propertyData.surface ? propertyData.surface : "Aucune information sur la surface disponible"}</li>
             </ul>
+
+
             <div id="tag" className="pt-2 pb-2">
               {getTags()}
             </div>
-
           </div>
 
           <div id="containerMap" className="border">
@@ -157,7 +142,7 @@ const PropertyCardDetail: FunctionComponent<Props> = ({ property }) => {
                 </FacebookShareButton>
               </div>
               <div className="socialBtn">
-                <TwitterShareButton url={"https://twitter.com/home"}>
+                <TwitterShareButton url={"https://twitter.com/home"} title={"Partager le bien"}>
                   <TwitterIcon></TwitterIcon>
                 </TwitterShareButton>
               </div>

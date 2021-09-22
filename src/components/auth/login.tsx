@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../../assets/css/login.css';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FunctionComponent } from 'react';
 
 
@@ -50,8 +50,8 @@ const Login: FunctionComponent<Props> = ({ updateToken }) => {
                     <button type="submit" className="center buttonForm">Connexion</button>
                 </form>
                 <div className="mt-3">
-                    <a href=""> S'inscrire</a> <br />
-                    <a href="">  Mot de passe oubliée</a>
+                    <Link to="/register" className="d-block">S'inscrire</Link>
+                    <Link to="" className="d-block">Mot de passe oubliée</Link>
                 </div>
             </div >
         </div >

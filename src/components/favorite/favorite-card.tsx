@@ -22,7 +22,6 @@ const FavoriteCard: FunctionComponent<Props> = ({ idProperty }) => {
     const [properties, setProperties] = useState<Property>();
     const [allData, setAllData] = useState<Array<PropertyData> | null>(null);
     const [favorite, setFavorite] = useState<string>("");
-    const [Data, setData] = useState<PropertyData>();
 
     const token = localStorage.token;
     const UserInfo: any = token ? jwt_decode(token) : "";
@@ -37,31 +36,41 @@ const FavoriteCard: FunctionComponent<Props> = ({ idProperty }) => {
     useEffect(() => {
         PropertyService.getProperty(idProperty).then(data => setProperties(data));
         PropertyService.getAllData(idProperty).then((data) => setAllData(data));
-        PropertyService.getData(idProperty, "thumbnail").then((data) => setData(data));
 
         if (token) {
             FavoriteService.getFavorite(token, UserInfo.idUser, idProperty).then(data => setFavorite(data ? "true" : "false"));
         }
     }, [idProperty])
 
+    let propertyData: any = [];
+    {
+        allData && (
+            allData.map(data => (
+                data.keyPropertyData === 'thumbnail' && (
+                    propertyData.thumbnail = data.valuePropertyData
+                ),
+                data.keyPropertyData === 'Description' && (
+                    propertyData.Description = data.valuePropertyData
+                ),
+                data.keyPropertyData === 'Chambres' && (
+                    propertyData.chambres = data.valuePropertyData
+                ),
+                data.keyPropertyData === 'Nombre de pièces' && (
+                    propertyData.pièces = data.valuePropertyData
+                ),
+                data.keyPropertyData === 'Surface' && (
+                    propertyData.surface = data.valuePropertyData
+                )
+            ))
+        )
+    }
+
     return (
         <div id="containerFavoriteCard" className="m-auto bg-white mb-4 shadow-1">
             <div className="containerThumbnailCard position-relative">
-                {Data ? (
-                    <img
-                        key={Data.idPropertyData}
-                        src={Data.valuePropertyData}
-                        alt="image_bien"
-                        className="thumbnailCard"
-                    />
-                ) : (
-                    <img
-                        src={ImgNotFound}
-                        alt="image_bien"
-                        className="thumbnailCard"
-                    />
-                )
-                }
+
+
+                <img src={propertyData.thumbnail ? propertyData.thumbnail : ImgNotFound} className="thumbnailCard" alt="image_bien" />
                 {
                     token &&
                     <FavBtn toggleFavorite={() => toggleFavorite()} favorite={favorite} />

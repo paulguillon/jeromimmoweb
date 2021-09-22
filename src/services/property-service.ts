@@ -35,33 +35,31 @@ export default class PropertyService {
       .get(
         `https://jeromimmo.fr/api/v1/properties/${idProperty}`
       )
-      .then((response) => response.data)
-      .then((data) => data);
-
+      .then((response: any) => response.data)
+      .then((data: any) => data)
   }
-
-
   static async getAllData(idProperty: number): Promise<Array<PropertyData>> {
-    const promise = await axios(`https://jeromimmo.fr/api/v1/properties/${idProperty}/data`);
+    const promise =
+      await axios(`https://jeromimmo.fr/api/v1/properties/${idProperty}/data`)
+
     const result = await promise.data;
     return result.data;
   }
-
   static async getData(idProperty: number, key: string): Promise<PropertyData> {
-    const promise = await axios(`https://jeromimmo.fr/api/v1/properties/${idProperty}/data/${key}`);
+    const promise = await axios(`https://jeromimmo.fr/api/v1/properties/${idProperty}/data/${key}`)
+
+
     const result = await promise.data;
     return result.data;
   }
-
   static searchProperty(term: string): Promise<Property[]> {
     return axios
       .get(`https://jeromimmo.fr/api/v1/properties?q=${term}`)
-      .then((response) => response.data);
+      .then((response: any) => response.data);
   }
   static getTags(): Array<string> {
     return ["Jardin", "Piscine", "Sous-sol", "Interphone", "Cheminée", "Gardien", "Belle vue", "Balcon", "Ascenseur", "Rez-de-chaussée", "Terrasse", "Cave", "Orientation Sud", "Climatisation", "Meublé", "Colocation", "Stationnement", "Plain-pied", "Accessibilité PMR", "Véranda", "Alarme", "Digicode"];
   }
-
   static isEmpty(data: Object): boolean {
     return Object.keys(data).length === 0;
   }

@@ -20,13 +20,14 @@ import Contact from "./pages/contact/contact";
 import jwt_decode from "jwt-decode";
 import favorites from "./pages/favorite/favorite";
 import Faq from "./pages/faq/faq";
+import Mention from "./pages/mention";
 
 
 const App: FunctionComponent = () => {
   const history = useHistory();
 
   if (!localStorage.token)
-    history.push('/logout');
+    history.push('/');
 
   const [token, setToken] = useState<string>(localStorage.token)
 
@@ -51,6 +52,7 @@ const App: FunctionComponent = () => {
       <HeaderNavigation token={token} />
       <Switch>
         <Route exact path="/register" component={Register} />
+
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/login">
           <Login updateToken={updateToken} />
@@ -58,9 +60,7 @@ const App: FunctionComponent = () => {
         <Route exact path="/logout">
           <Logout updateToken={updateToken} />
         </Route>
-
-        <Route exact path="/condition-general" />
-        <Route exact path="/mentions-legales" />
+        <Route exact path="/mentions-legales" component={Mention} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/faq" component={Faq} />
         <Route exact path="/favoris" component={favorites} />

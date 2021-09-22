@@ -1,28 +1,70 @@
 import { FunctionComponent, useState, useEffect } from "react";
+
 import PropertyService from "../services/property-service";
-import PropertyList from "../components/property/property-list";
 import Properties from "../models/property/properties";
+import PropertyCard from "../components/property/property-card";
+import "../assets/css/property.css";
+
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import { Link } from "react-router-dom";
+import { divIcon } from "leaflet";
 
 const Home: FunctionComponent = () => {
   const [maisons, setMaisons] = useState<Properties>({ total: 0, properties: [] });
   const [appartements, setAppartements] = useState<Properties>({ total: 0, properties: [] });
-  const [garages, setGarages] = useState<Properties>({ total: 0, properties: [] });
-  const [terrains, setTerrains] = useState<Properties>({ total: 0, properties: [] });
 
   useEffect(() => {
-    PropertyService.getProperties("Maison", "", "", "", [], "3", "").then(
+    PropertyService.getProperties("Maison", "", "", "", [], "6", "").then(
       (properties) => setMaisons(properties)
     );
-    PropertyService.getProperties("Appartement", "", "", "", [], "3", "").then(
+    PropertyService.getProperties("Appartement", "", "", "", [], "6", "").then(
       (properties) => setAppartements(properties)
     );
-    PropertyService.getProperties("Garage", "", "", "", [], "3", "").then(
-      (properties) => setGarages(properties)
-    );
-    PropertyService.getProperties("Terrain", "", "", "", [], "3", "").then(
-      (properties) => setTerrains(properties)
-    );
   }, []);
+
+  const getMaisons = () => {
+    return (
+      maisons.properties.map((maison) =>
+      (
+        <div className="m-2">
+          <PropertyCard property={maison} />
+        </div>
+      ))
+    )
+  }
+
+  const getAppartements = () => {
+    return (
+      appartements.properties.map((appartement) =>
+      (
+        <div className="m-2">
+          <PropertyCard property={appartement} />
+        </div>
+      ))
+    )
+  }
+
+
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 768 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 768, min: 0 },
+      items: 1
+    }
+  };
 
   return (
     <div>
@@ -32,11 +74,26 @@ const Home: FunctionComponent = () => {
 
 
       <div className="container">
-        <PropertyList key="Appartements" title="Appartements" data={appartements} />
-        <PropertyList key="Maisons" title="Maisons" data={maisons} />
-        <PropertyList key="Terrains" title="Terrains" data={terrains} />
-        <PropertyList key="Garages" title="Garages" data={garages} />
+
+        <div className="mb-5 mt-5">
+          <Carousel responsive={responsive} draggable={false}>
+            {getMaisons()}
+          </Carousel>
+        </div>
+
+        <div className="mb-5 mt-5">
+          <Carousel responsive={responsive} draggable={false}>
+            {getAppartements()}
+          </Carousel>
+        </div>
       </div>
+
+
+      <div className="bg-danger w-100">
+        Découvrir tout nos bien !!!
+        <Link to="/properties">Découvir</Link>
+      </div>
+
     </div>
   );
 };

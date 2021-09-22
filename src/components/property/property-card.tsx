@@ -13,11 +13,11 @@ import ImgNotFound from "../../assets/img/imgNotFound.jpg";
 type Props = {
   property: Property
 }
+
 const PropertyCard: FunctionComponent<Props> = ({ property }) => {
 
   const [allData, setAllData] = useState<Array<PropertyData> | null>(null);
   const [favorite, setFavorite] = useState<string>("");
-  const [Data, setData] = useState<PropertyData>();
 
   const token = localStorage.token;
   const UserInfo: any = token ? jwt_decode(token) : "";
@@ -25,13 +25,10 @@ const PropertyCard: FunctionComponent<Props> = ({ property }) => {
 
   useEffect(() => {
     PropertyService.getAllData(property.idProperty).then((data) => setAllData(data));
-    PropertyService.getData(property.idProperty, "thumbnail").then((data) => setData(data));
     if (token) {
       FavoriteService.getFavorite(token, UserInfo.idUser, property.idProperty).then(data => setFavorite(data ? "true" : "false"));
     }
-
   }, [UserInfo.idUser, property.idProperty, token]);
-
 
   const toggleFavorite = () => {
     if (token) {
@@ -40,24 +37,35 @@ const PropertyCard: FunctionComponent<Props> = ({ property }) => {
     }
   }
 
-  return (
-    <div id="containerPropertyCard" className=" d-flex flex-column  border p-0  mb-3 "  >
-      <div className="containerThumbnailCard position-relative">
-        {Data ? (
-          <img
-            key={Data.idPropertyData}
-            src={Data.valuePropertyData}
-            alt="image_bien"
-            className="thumbnailCard"
-          />
-        ) : (
-          <img
-            src={ImgNotFound}
-            alt="image_bien"
-            className="thumbnailCard"
-          />
+
+  let propertyData: any = [];
+  {
+    allData && (
+      allData.map(data => (
+        data.keyPropertyData === 'thumbnail' && (
+          propertyData.thumbnail = data.valuePropertyData
+        ),
+        data.keyPropertyData === 'Description' && (
+          propertyData.Description = data.valuePropertyData
+        ),
+        data.keyPropertyData === 'Chambres' && (
+          propertyData.chambres = data.valuePropertyData
+        ),
+        data.keyPropertyData === 'Nombre de pièces' && (
+          propertyData.pièces = data.valuePropertyData
+        ),
+        data.keyPropertyData === 'Surface' && (
+          propertyData.surface = data.valuePropertyData
         )
-        }
+      ))
+    )
+  }
+
+
+  return (
+    <div className="cardImmobilier d-flex flex-column  border p-0">
+      <div className="containerThumbnailCard position-relative">
+        <img key={property.idProperty} src={propertyData.thumbnail ? propertyData.thumbnail : ImgNotFound} className="thumbnailCard" alt="image_bien" />
         {
           token &&
           <FavBtn toggleFavorite={() => toggleFavorite()} favorite={favorite} />
@@ -75,14 +83,12 @@ const PropertyCard: FunctionComponent<Props> = ({ property }) => {
         {`${property.cityProperty}, ${property.zipCodeProperty}`}
         <p>
         </p>
-
         <div id="container-button" className="d-flex justify-content-end">
-          <Btn texte="Voir le bien" push={"/property/" + property.idProperty} />
+          <Btn texte="Voir le bien" key={property.idProperty} push={"/property/" + property.idProperty} />
         </div>
-
-
       </div>
     </div >
+
   );
 };
 

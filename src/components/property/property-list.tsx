@@ -12,7 +12,9 @@ type Props = {
 };
 
 const PropertyList: FunctionComponent<Props> = ({ data }) => {
+
   const { properties } = data;
+
   return (
     <div style={{ minHeight: "400px", backgroundColor: 'whitesmoke' }}>
       <div className="container p-5">
@@ -21,7 +23,9 @@ const PropertyList: FunctionComponent<Props> = ({ data }) => {
           properties ? (
             <div className="containerListPropertyCard">
               {properties.map((property) => (
-                <PropertyCard key={property.idProperty} property={property} />
+                <div id="containerPropertyCard" >
+                  <PropertyCard key={property.idProperty} property={property} />
+                </div>
               ))}
             </div>
           ) : (
