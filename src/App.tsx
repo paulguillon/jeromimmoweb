@@ -26,7 +26,7 @@ const App: FunctionComponent = () => {
   const history = useHistory();
 
   if (!localStorage.token)
-    history.push('/logout');
+    history.push('/login');
 
   const [token, setToken] = useState<string>(localStorage.token)
 
