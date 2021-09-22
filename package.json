@@ -1,8 +1,8 @@
 {
   "name": "jeromimmoweb",
-  "homepage": "https://paulguillon.github.io",
+  "homepage": "https://paulguillon.github.io/jeromimmoweb/",
   "version": "1.0.0",
-  "description": "An awesome application to handle some pokemons.",
+  "description": "Site web d'agence immobilière",
   "dependencies": {
     "@types/node": "14.14.31",
     "@types/react": "17.0.2",
