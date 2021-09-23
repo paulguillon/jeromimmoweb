@@ -1,24 +1,28 @@
 {
   "files": {
-    "main.css": "/jeromimmoweb/static/css/main.670d51ff.chunk.css",
-    "main.js": "/jeromimmoweb/static/js/main.787a8620.chunk.js",
-    "main.js.map": "/jeromimmoweb/static/js/main.787a8620.chunk.js.map",
-    "runtime-main.js": "/jeromimmoweb/static/js/runtime-main.e82d39a4.js",
-    "runtime-main.js.map": "/jeromimmoweb/static/js/runtime-main.e82d39a4.js.map",
-    "static/js/2.5001fb20.chunk.js": "/jeromimmoweb/static/js/2.5001fb20.chunk.js",
-    "static/js/2.5001fb20.chunk.js.map": "/jeromimmoweb/static/js/2.5001fb20.chunk.js.map",
-    "index.html": "/jeromimmoweb/index.html",
-    "static/css/main.670d51ff.chunk.css.map": "/jeromimmoweb/static/css/main.670d51ff.chunk.css.map",
-    "static/js/2.5001fb20.chunk.js.LICENSE.txt": "/jeromimmoweb/static/js/2.5001fb20.chunk.js.LICENSE.txt",
-    "static/media/favorisFalse.9e0e93a2.svg": "/jeromimmoweb/static/media/favorisFalse.9e0e93a2.svg",
-    "static/media/favorisTrue.00097730.svg": "/jeromimmoweb/static/media/favorisTrue.00097730.svg",
-    "static/media/imgNotFound.dbb4c03e.jpg": "/jeromimmoweb/static/media/imgNotFound.dbb4c03e.jpg",
-    "static/media/logo.2e360483.svg": "/jeromimmoweb/static/media/logo.2e360483.svg"
+    "main.css": "/static/css/main.f4f894ad.chunk.css",
+    "main.js": "/static/js/main.325cbadb.chunk.js",
+    "main.js.map": "/static/js/main.325cbadb.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.90771b01.js",
+    "runtime-main.js.map": "/static/js/runtime-main.90771b01.js.map",
+    "static/css/2.cf0b44da.chunk.css": "/static/css/2.cf0b44da.chunk.css",
+    "static/js/2.ac4dc181.chunk.js": "/static/js/2.ac4dc181.chunk.js",
+    "static/js/2.ac4dc181.chunk.js.map": "/static/js/2.ac4dc181.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.cf0b44da.chunk.css.map": "/static/css/2.cf0b44da.chunk.css.map",
+    "static/css/main.f4f894ad.chunk.css.map": "/static/css/main.f4f894ad.chunk.css.map",
+    "static/js/2.ac4dc181.chunk.js.LICENSE.txt": "/static/js/2.ac4dc181.chunk.js.LICENSE.txt",
+    "static/media/favorisFalse.9e0e93a2.svg": "/static/media/favorisFalse.9e0e93a2.svg",
+    "static/media/favorisTrue.00097730.svg": "/static/media/favorisTrue.00097730.svg",
+    "static/media/imgNotFound.dbb4c03e.jpg": "/static/media/imgNotFound.dbb4c03e.jpg",
+    "static/media/logo.2e360483.svg": "/static/media/logo.2e360483.svg",
+    "static/media/styles.css": "/static/media/revicons.e8746a62.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.e82d39a4.js",
-    "static/js/2.5001fb20.chunk.js",
-    "static/css/main.670d51ff.chunk.css",
-    "static/js/main.787a8620.chunk.js"
+    "static/js/runtime-main.90771b01.js",
+    "static/css/2.cf0b44da.chunk.css",
+    "static/js/2.ac4dc181.chunk.js",
+    "static/css/main.f4f894ad.chunk.css",
+    "static/js/main.325cbadb.chunk.js"
   ]
 }
