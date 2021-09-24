@@ -21,7 +21,7 @@ const FavoriteList: FunctionComponent = () => {
 
     useEffect(() => {
         FavoriteService.getFavorites(token, UserInfo.idUser).then(dataFavorites => setFavorites(dataFavorites));
-        favorites.forEach(favoris => {
+        favorites.forEach((favoris: any) => {
             PropertyService.getProperty(favoris.idProperty).then(dataProperty => setProperties(dataProperty));
         })
     }, [UserInfo.idUser, token])
@@ -31,9 +31,13 @@ const FavoriteList: FunctionComponent = () => {
         <div className="container p-5 m-auto">
             <div className="m-auto mt-5 mb-5  ">
                 <div className="d-flex flex-wrap">
-                    {favorites.map((favoris) => (
-                        <FavoriteCard key={favoris.idProperty} idProperty={favoris.idProperty} />
+                    {Object.keys(favorites).map((favoris: any) => (
+                        <FavoriteCard key={favorites[favoris].idProperty} idProperty={favorites[favoris].idProperty} />
                     ))}
+
+                    {/* {favorites.map((favoris: any) => (
+                        <FavoriteCard key={favorites[favoris].idProperty} idProperty={favorites[favoris].idProperty} />
+                    ))} */}
                 </div >
             </div>
         </div>
