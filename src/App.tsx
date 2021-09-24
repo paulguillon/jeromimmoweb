@@ -26,9 +26,12 @@ import Mention from "./pages/mention";
 const App: FunctionComponent = () => {
   const history = useHistory();
 
+<<<<<<< HEAD
   if (!localStorage.token)
     history.push('/login');
 
+=======
+>>>>>>> 08a866d8b6389714d27047b70d37890e23f7aec0
   const [token, setToken] = useState<string>(localStorage.token)
 
   const updateToken = (token: string) => {
