@@ -123,9 +123,7 @@ const Profile: FunctionComponent = () => {
                 </div>
               </form>
             ) : (
-
               <Loader />
-
             )}
           </div>
         </div>
