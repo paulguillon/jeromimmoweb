@@ -29,26 +29,22 @@ export default class VisitService {
   }
 
   static async getAllData(idVisit: number, token: string): Promise<Array<VisitData>> {
+    const promise =
+      await axios(`https://jeromimmo.fr/api/v1/properties/${idVisit}/data`)
+
+    const result = await promise.data;
+    return result.data;
+  }
+
+  static async getData(idVisit: number, key: string, token: string): Promise<VisitData> {
     const promise = await axios({
       method: 'GET',
-      url: `https://jeromimmo.fr/api/v1/visits/${idVisit}/data`,
+      url: `https://jeromimmo.fr/api/v1/visits/${idVisit}/data/${key}`,
       headers: {
         Authorization: 'Bearer ' + token,
       }
     });
     const result = await promise.data;
     return result.data;
-  }
-
-  static async getData(idVisit: number, key: string, token: string): Promise<VisitData> {
-      const promise = await axios({
-        method: 'GET',
-        url: `https://jeromimmo.fr/api/v1/visits/${idVisit}/data/${key}`,
-        headers: {
-          Authorization: 'Bearer ' + token,
-        }
-      });
-      const result = await promise.data;
-      return result.data;
   }
 }

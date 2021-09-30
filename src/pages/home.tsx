@@ -8,7 +8,6 @@ import "../assets/css/property.css";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { Link } from "react-router-dom";
-import { divIcon } from "leaflet";
 
 const Home: FunctionComponent = () => {
   const [maisons, setMaisons] = useState<Properties>({ total: 0, properties: [] });
@@ -68,8 +67,12 @@ const Home: FunctionComponent = () => {
 
   return (
     <div>
-      <header className="text-center p-5 mb-5">
-        <h1>Bienvenue chez Jeromimmo </h1>
+      <header className="header-info  text-center   d-flex justify-content-center" >
+        <div className="filter"></div>
+        <div className="container-info w-75 m-auto text-center">
+          <h1 className="mb-5">1300 agences immobilières partout,<br /> rien que pour vous !</h1>
+          <Link to="/properties" className="btn-info">Découvir nos biens</Link>
+        </div>
       </header>
 
 
@@ -88,11 +91,18 @@ const Home: FunctionComponent = () => {
         </div>
       </div>
 
+      <div className="newsletter">
+        <div className="container m-auto w-lg-50">
+          <h2>Ne manquez plus nos actualités et conseils ! </h2>
+          <p>Conseils, chiffres clés, marché… Notre équipe met tout en oeuvre <br /> pour que vous ne ratiez aucune opportunité business !</p>
+          <div className="input-info m-auto d-flex justify-content-center align-items-center">
+            <input type="text" className="inputmail-info"  />
+            <button type="submit" className="inputbtn-info">Envoyer</button>
+          </div>
+        </div>
 
-      <div className="bg-danger w-100">
-        Découvrir tout nos bien !!!
-        <Link to="/properties">Découvir</Link>
       </div>
+
 
     </div>
   );

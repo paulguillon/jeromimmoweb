@@ -33,7 +33,7 @@ const Register = () => {
     }
 
     return (
-        <div className="m-auto w-25 container-form">
+        <div className="m-auto mt-5 mb-5 w-25 container-form">
             <div className="w-100 d-flex flex-column justify-content-between ">
                 <h1>S'inscrire</h1>
                 <form action="" onSubmit={Submit}>

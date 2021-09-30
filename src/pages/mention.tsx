@@ -1,7 +1,5 @@
-import { FunctionComponent, useState, useEffect } from "react";
-import PropertyService from "../services/property-service";
-import PropertyList from "../components/property/property-list";
-import Properties from "../models/property/properties";
+import { FunctionComponent } from "react";
+ 
 
 const Mention: FunctionComponent = () => {
 

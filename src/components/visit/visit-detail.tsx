@@ -6,8 +6,7 @@ import AgencyService from "../../services/agency-service";
 import PropertyService from "../../services/property-service";
 import UserService from "../../services/user-service";
 import VisitService from "../../services/visit-service";
-import Loader from "../loader";
-
+ 
 type Props = {
   visit: Visit,
   token: string
